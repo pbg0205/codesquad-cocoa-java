@@ -1,4 +1,4 @@
-package algorithm.baekjoon9498;
+package algorithm.baekjoon9488;
 /*
  * @Problem     시험 성적(9498)
  * @author      cooper

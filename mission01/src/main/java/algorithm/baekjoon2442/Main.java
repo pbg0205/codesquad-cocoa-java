@@ -1,4 +1,4 @@
-package algorithm.baekjoon2443;
+package algorithm.baekjoon2442;
 
 import java.util.Scanner;
 
