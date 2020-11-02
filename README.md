@@ -3,4 +3,4 @@
    
    
 ## Daily Summary
-1. [Day1. 구구단 만들기, 알고리즘 문제(조건문, 별찍기)]()
+1. [Day1. 구구단 만들기, 알고리즘 문제(조건문, 별찍기)](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission01)

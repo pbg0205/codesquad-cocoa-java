@@ -16,7 +16,6 @@
                              │                                 ├─── baekjoon2753
                              │                                 ├─── baekjoon2884
                              │                                 ├─── baekjoon9498
-  
                              │                                 ├─── baekjoon11720
                              │                                 └─── baekjoon14681
                              │  
@@ -117,16 +116,16 @@
 ### 3.알고리즘 문제
 - 조건문 연습
     - [if문 단계(baekjoon)](https://www.acmicpc.net/step/4)
-        - ([문제](https://www.acmicpc.net/problem/1330) / [풀이]())두 수 비교하기(1330)
-        - ([문제](https://www.acmicpc.net/problem/9498) / [풀이]())시험 성적(9488)
-        - ([문제](https://www.acmicpc.net/problem/2753) / [풀이]())윤년(2743)
-        - ([문제](https://www.acmicpc.net/problem/14681) / [풀이]())사분면 고르기(14681)
-        - ([문제](https://www.acmicpc.net/problem/2884) / [풀이]())알람 시계(2884)
+        - ([문제](https://www.acmicpc.net/problem/1330) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon1330/Main.java))두 수 비교하기(1330)
+        - ([문제](https://www.acmicpc.net/problem/9498) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon9488/Main.java))시험 성적(9488)
+        - ([문제](https://www.acmicpc.net/problem/2753) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission01/src/main/java/algorithm/baekjoon2753))윤년(2743)
+        - ([문제](https://www.acmicpc.net/problem/14681) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon14681/Main.java))사분면 고르기(14681)
+        - ([문제](https://www.acmicpc.net/problem/2884) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon2884/Main.java))알람 시계(2884)
 - 반복문 연습
-    - ([문제](https://www.acmicpc.net/problem/2438) / [풀이]())별 찍기 - 1(2438)
-    - ([문제](https://www.acmicpc.net/problem/11720) / [풀이]())숫자의 합(11720)
+    - ([문제](https://www.acmicpc.net/problem/2438) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon2438/Main.java))별 찍기 - 1(2438)
+    - ([문제](https://www.acmicpc.net/problem/11720) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon11720/Main.java))숫자의 합(11720)
 
 - 별찍기
     - [별찍기(baekjoon)](https://www.acmicpc.net/workbook/view/20)
-        - ([문제](https://www.acmicpc.net/problem/2442) / [풀이]())별 찍기 - 5(2442)
+        - ([문제](https://www.acmicpc.net/problem/2442) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon2442/Main.java))별 찍기 - 5(2442)
         
