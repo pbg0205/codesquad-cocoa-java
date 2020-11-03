@@ -1,10 +1,10 @@
-# Day1 미션
-## 목록(Contents)
+## Day1 미션
+### 목록(Contents)
 - (1) 파일 경로
 - (2) 구구단 출력
 - (3) 알고리즘 문제
 
-## 미션 정리(Summary)  
+### 미션 정리(Summary)  
 - 파일 경로
     ````
     mission01 ────── src ────┬────  main ────┬──── gugudan ────┬──── domain ─┬── Gugudan.java
@@ -129,3 +129,46 @@
     - [별찍기(baekjoon)](https://www.acmicpc.net/workbook/view/20)
         - ([문제](https://www.acmicpc.net/problem/2442) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission01/src/main/java/algorithm/baekjoon2442/Main.java))별 찍기 - 5(2442)
         
+        
+## Day2
+### 1. 함수와 메소드 차이
+> 함수(function)과 메소드(method)   
+> - 공통 특징
+>      - 매개 변수를 입력받아 결과값을 반환 한다.(void형 제외)   
+> - 차이점
+>   - 메서드(method) : 특정 class에 반드시 속해야 한다는 제약이 있다.   
+>   - 함수(function) : 람다식을 통해 메서드가 하나의 독립적인 기능을 하는 역할
+>
+### 2. 파일 읽기의 기초
+1.Scanner()
+``` 
+    Scanner scanner = new Scanner(System.in);
+    
+    int intValue = scanner.nextInt();           // 정수형 값을 입력받고 싶은 경우 사용
+    double doubleValue = scanner.nextFloat();   // 실수형 값을 입력받고 싶은 경우 사용
+    String strValue = scanner.nextLine();       //문자형 값을 입력받고 싶은 경우
+    
+    scanner.close();                            //입력 스트림을 닫는 메소드
+```
+- java.util class중 입력을 받을 때 사용하는 클래스
+- 정수, 실수, 문자열을 읽어올 수 있다.
+
+2.BufferedReader()
+```
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in);
+    String strValue = br.readLine();           //줄 단위로 문자 형태로 입력을 받겠다는 의미    
+    int intValue = br.read();                  //char단위로 한 문자씩 입력받는다.
+    
+    //만약 줄단위로 숫자를 입력을 받고 싶다면?
+    int intValue = Integer.parseInt(br.readLine());
+    /*
+     * - 의미
+     * 1. br.readLine() : 줄단위로 입력을 받아
+     * 2. Integer.parseInt() : 문자형 값을 정수 형태로 변경하겠다.
+     */
+    br.close();
+```
+- java.io class에 위치
+- buffered을 사용하여 입출력이 빠르다.(대략 Scanner의 6배)
+ 
+ 
