@@ -11,7 +11,7 @@ public class InputView {
 
     public static String inputCommand(){
         String command = "";
-        boolean result;//TODO : InputValidator 만들기
+        boolean result;
 
         do {
             System.out.println("나아갈 방향을 선택해주세요");
