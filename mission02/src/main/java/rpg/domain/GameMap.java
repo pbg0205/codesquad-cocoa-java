@@ -6,11 +6,11 @@ public class GameMap {
 
     private String[][] map;
 
-    public GameMap(Player player, Point monster, Point landMine) {
-        this.map = initMap(player, monster, landMine);
+    public GameMap(PlayerPoint playerPoint, Point monster, Point landMine) {
+        this.map = initMap(playerPoint, monster, landMine);
     }
 
-    private String[][] initMap(Player player, Point monster, Point landMine){
+    private String[][] initMap(PlayerPoint playerPoint, Point monster, Point landMine){
         this.map = new String[MAP_RANGE_MAX][MAP_RANGE_MAX];
 
         for (int row = 0; row < MAP_RANGE_MAX; row++) {
@@ -19,14 +19,14 @@ public class GameMap {
             }
         }
 
-        initPlayerLocation(player);
+        initPlayerLocation(playerPoint);
         initMonsterLocation(monster);
         initLandMineLocation(landMine);
 
         return map;
     }
 
-    private void initPlayerLocation(Player player) {
+    private void initPlayerLocation(PlayerPoint player) {
         int x = player.getX();
         int y = player.getY();
         this.map[x][y] = "\uD83D\uDE01";
@@ -46,7 +46,7 @@ public class GameMap {
         this.map[x][y] = "\uD83D\uDCA3";//TODO LandMine 위치 인덱스 변경하기
     }
 
-    public void movePlayerUpper(Player player){
+    public void movePlayerUpper(PlayerPoint player){
         int x = player.getX();
         int y = player.getY();
 
@@ -63,7 +63,7 @@ public class GameMap {
         this.map[x-1][y] = tmp;
     }
 
-    public void movePlayerDown(Player player){
+    public void movePlayerDown(PlayerPoint player){
         int x = player.getX();
         int y = player.getY();
 
@@ -80,7 +80,7 @@ public class GameMap {
         this.map[x+1][y] = tmp;
     }
 
-    public void movePlayerLeft(Player player){
+    public void movePlayerLeft(PlayerPoint player){
         int x = player.getX();
         int y = player.getY();
 
@@ -97,7 +97,7 @@ public class GameMap {
         this.map[x][y-1] = tmp;
     }
 
-    public void movePlayerRight(Player player){
+    public void movePlayerRight(PlayerPoint player){
         int x = player.getX();
         int y = player.getY();
 

@@ -5,16 +5,16 @@ import rpg.view.InputView;
 import rpg.view.OutputView;
 
 public class Game {
-    private Player player;
+    private PlayerPoint playerPoint;
     private GameMap gameMap;
     private Point landMine;
     private Point monster;
 
     public Game(){
-        this.player = new Player();
+        this.playerPoint = new PlayerPoint();
         this.monster = new Point(RandomNumberCreator.create(), RandomNumberCreator.create());
         this.landMine = new Point(RandomNumberCreator.create(), RandomNumberCreator.create());
-        this.gameMap = new GameMap(player, monster, landMine);
+        this.gameMap = new GameMap(playerPoint, monster, landMine);
     }
 
     public void start() {
@@ -33,20 +33,20 @@ public class Game {
 
     public void moveMapByCommand(String command){
         if(command.equalsIgnoreCase("W")){
-            gameMap.movePlayerUpper(player);
-            player.moveUp();
+            gameMap.movePlayerUpper(playerPoint);
+            playerPoint.moveUp();
         }
         if(command.equalsIgnoreCase("S")){
-            gameMap.movePlayerDown(player);
-            player.moveDown();
+            gameMap.movePlayerDown(playerPoint);
+            playerPoint.moveDown();
         }
         if(command.equalsIgnoreCase("A")){
-            gameMap.movePlayerLeft(player);
-            player.moveLeft();
+            gameMap.movePlayerLeft(playerPoint);
+            playerPoint.moveLeft();
         }
         if(command.equalsIgnoreCase("D")){
-            gameMap.movePlayerRight(player);
-            player.moveRight();
+            gameMap.movePlayerRight(playerPoint);
+            playerPoint.moveRight();
         }
     }
 
@@ -73,11 +73,19 @@ public class Game {
 
     //TODO : 동치 조건 인스턴스로 변환하는 방법 찾아보기
     private boolean sameWithMonster() {
-        return (player.getX() == monster.getX()) && (player.getY() == monster.getY());
+        if(monster.equals(playerPoint)){
+            return true;
+        }
+
+        return false;
     }
     //TODO : 동치 조건 인스턴스로 변환하는 방법 찾아보기
     private boolean sameWithLandMine() {
-        return (player.getX() == landMine.getX()) && (player.getY() == landMine.getY());
+        if(landMine.equals(playerPoint)){
+            return true;
+        }
+
+        return false;
     }
 
 

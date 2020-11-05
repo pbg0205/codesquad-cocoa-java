@@ -1,7 +1,5 @@
 package rpg.domain;
 
-import java.util.Objects;
-
 public class Point {
     private int x;
     private int y;
@@ -19,17 +17,23 @@ public class Point {
         return y;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Point point = (Point) o;
-        return x == point.x &&
-                y == point.y;
+    void setX(int x) {
+        this.x = x;
+    }
+
+    void setY(int y) {
+        this.y = y;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(x, y);
+    public boolean equals(Object o) {
+        if (!(o instanceof Point)){
+            return false;
+        }
+
+        Point p = (Point)o;
+
+        return p.x == x && p.y == y;
     }
+
 }
