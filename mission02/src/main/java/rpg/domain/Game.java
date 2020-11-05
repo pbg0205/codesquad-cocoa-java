@@ -71,7 +71,6 @@ public class Game {
         }
     }
 
-    //TODO : 동치 조건 인스턴스로 변환하는 방법 찾아보기
     private boolean sameWithMonster() {
         if(monster.equals(playerPoint)){
             return true;
@@ -79,7 +78,7 @@ public class Game {
 
         return false;
     }
-    //TODO : 동치 조건 인스턴스로 변환하는 방법 찾아보기
+
     private boolean sameWithLandMine() {
         if(landMine.equals(playerPoint)){
             return true;

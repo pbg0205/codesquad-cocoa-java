@@ -23,7 +23,8 @@ public class PlayerPoint extends Point{
         super.setY(super.getY() + 1);
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (!(o instanceof PlayerPoint))
             return false;
 
