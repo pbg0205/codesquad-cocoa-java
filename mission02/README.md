@@ -20,7 +20,7 @@
 <br/><br/>
 ***
 - ### 2-2:초간단 RPG 구현하기
->####파일 경로
+>#### 파일 경로
 
     ````
     mission02 ────── src ────┬────  main ────┬────   rpg   ────┬──── domain ──┬── Game.java
@@ -56,7 +56,7 @@
 - 똑같이 구현하지 않아도 되니 재미있는 게임을 만들어 보자.
 
 >### 구현 화면
-####1.게임 화면
+#### 1.게임 화면
 ````
 
       🔳  🔳  🔳  🔳  🔳  🔳  🔳  🔳  🔳  🔳  🔳
@@ -90,7 +90,7 @@
 ````
 <br>
 
-####2.승리 화면
+#### 2.승리 화면
 
 ````
 
@@ -114,7 +114,7 @@
 ````
 <br>
 
-####3.패배 화면
+#### 3.패배 화면
 
 ````
 
@@ -139,7 +139,7 @@ w
 
 <br/><br/>
 *** 
-###3.TO-DO-LIST
+### 3.TO-DO-LIST
 >- **객체로 동치 비교 방법 찾기**
 >   - [equals & hashcode 재정의 코드(이펙티브 자바)](https://github.com/gmlwjd9405/effective-java-3e-source-code/tree/master/src/effectivejava/chapter3/item10)
 >- 클래스 변수
@@ -160,14 +160,14 @@ w
 <br/><br/>
 
 ## 1. 수업 내용 정리
-> ###What is JVM?(Java Virture Machine)
+> ### What is JVM?(Java Virture Machine)
  기존의 프로그램(C,C++)을 실행하기 위해서는 운영체제(OS)의 의존적이기 떄문에 호환성이 떨어졌다.   
  하지만 <u>JAVA는 JVM(Java Virture Machine)사용해서 OS의 의존성을 해결했다.</u> 즉, 개발자가 하나의 코드만 만들면
  똑같은 운영체제에서 똑같이 실행할 수 있다. <u>호환성이 높은 장점</u>이 존재하지만 반대로 OS와 응용 프로그램 사이에 <u>JVM
  이 개입하기 때문에 속도가 떨어진다는 단점</u>을 가진다.   
 <br>
 
-> ###JVM의 메모리구조
+> ### JVM의 메모리구조
 - method area(메서드 영역)
     - .class(byte code)를 분석해서 클래스 데이터를 저장하는 공간
         - <u>클래스 변수(class variable)이 생성 및 저장</u>된다.   
@@ -191,7 +191,7 @@ w
             ```
 <br>
 
->###call by value/reference
+>### call by value/reference
  - call by value(값에 의한 호출)
     - 함수 안에서 매개변수 값을 바꿔도 바깥에 영양을 주지 않는다.
     - argument != parameter : <u>메서드의 argument을 값으로 복사 후 메서드 로직을 처리하기 떄문에 다른 값으
@@ -225,7 +225,7 @@ w
          ```
 <br>
 
-> ###kruth shuffle
+> ### kruth shuffle
 - 모든 변수를 나열한 후, 요소들을 섞는 방법
     ```
        Random r = new Random();
