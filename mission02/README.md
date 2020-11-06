@@ -292,8 +292,10 @@ w
        @equals를 재정의 하여 부모의 재정의한 equals를 사용하겠다고 명시해주자!
        이렇게 코드를 작성시 반사성을 위반하는 것을 방지할 수 있다.
        - 반사성 : x.equals(y) = true이고 y.equals(x) 모두 true임을 반환하는 방법
-       <br>
+       <br/><br/>
        
-       
-       
-       
+# Day5. 1주차 알고리즘 문제 풀이
+- 아래 구현한 코드들은 <u>최대한 객체 지향적으로 문제 풀이</u>한 코드들입니다.
+- 직사각형에서 탈출(1085) ([문제](https://www.acmicpc.net/problem/1085) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission02/src/main/java/algorithm/baekjoon1085/Main.java))
+- 검증수(2475) ([문제](https://www.acmicpc.net/problem/2475) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission02/src/main/java/algorithm/baekjoon1085/Main.java))
+- 상수(2908) ([문제](https://www.acmicpc.net/problem/2908) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission02/src/main/java/algorithm/beakjoon2908/Main_OOP.java))
