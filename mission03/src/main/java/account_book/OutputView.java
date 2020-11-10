@@ -89,7 +89,7 @@ public class OutputView {
 
     public static void recordListMessage(){
         System.out.println("======== 목록 ========");
-        System.out.printf("%10s %20s %10s\n","날짜", "적요", "금액");
+        System.out.printf("%5s %20s %20s %20s\n", "인덱스","날짜", "적요", "금액");
     }
 
     private static void commandSelectionMessage() {
@@ -130,5 +130,9 @@ public class OutputView {
 
     private static void logOutMessage(){
         System.out.println("5.로그아웃");
+    }
+
+    public static void noRecordMessage() {
+        System.out.println("조회할 목록이 존재하지 않습니다.");
     }
 }

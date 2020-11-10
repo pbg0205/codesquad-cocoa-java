@@ -14,28 +14,21 @@ public class RecordList {
         return recordList.stream().mapToInt(Record::getMoney).sum();
     }
 
-    public void addRecord(String dateStr, String deatil, int money) {
-        if (isValid(dateStr, deatil, money)) {
-            recordList.add(new Record(dateStr, deatil, money));
-        }
-    }
-
-    //TODO 입력 데이터 유형성 검사 메소드 구현하기
-    private boolean isValid(String dateStr, String deatil, int money) {
-        return true;
-    }
-
     public void printRecords() {
         int recordsSize = this.recordList.size();
+
         if(recordsSize == 0){
-            System.out.println("조회할 목록이 존재하지 않습니다.");
+            OutputView.noRecordMessage();
             return ;
         }
 
         OutputView.recordListMessage();
+        printRecord(recordsSize);
+    }
 
+    private void printRecord(int recordsSize){
         for (int index = 0; index < recordsSize; index++) {
-            System.out.println(index + " : " + this.recordList.get(index));
+            System.out.printf("%5d %10s\n",index, this.recordList.get(index));
         }
     }
 

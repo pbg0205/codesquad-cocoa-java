@@ -193,7 +193,7 @@ w
 
 >### call by value/reference
  - call by value(값에 의한 호출)
-    - 함수 안에서 매개변수 값을 바꿔도 바깥에 영양을 주지 않는다.
+    - 함수 안에서 매개변수 값을 바꿔도 바깥에 영향을 주지 않는다.
     - argument != parameter : <u>메서드의 argument을 값으로 복사 후 메서드 로직을 처리하기 떄문에 다른 값으
     로 인지하자!</u>
          ```

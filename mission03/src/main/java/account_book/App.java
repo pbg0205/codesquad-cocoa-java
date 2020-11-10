@@ -12,31 +12,80 @@ class App {
     public void start() {
         while (true) {
             mainPage();
-            isLogin = true;
             recordPage();
         }
+    }
+
+    private void mainCommand(int appCommand) {
+        if (appCommand == 1) {
+            if (isMember()) {
+                isLogin = true;
+                String loginId = loginMember.getId();
+                OutputView.successLoginMessage(loginId);
+                
+                return;
+            }
+            OutputView.failLoginMessage();
+        }
+
+        if (appCommand == 2) {
+            if (registerMember()) {
+                OutputView.successRegisterMessage();
+            }
+            OutputView.failRegisterMessage();
+        }
+
+        if (appCommand == 0) {
+            quitProgram();
+        }
+    }
+
+    private void mainPage() {
+        int appCommand;
+
+        do {
+            OutputView.MainViewMessage();
+            appCommand = InputView.inputIntValue();
+            mainCommand(appCommand);
+        } while (!isLogin);
+    }
+
+    private boolean isMember() {
+        OutputView.loginMessage();
+        Member member = new Member(inputId(), inputPw());
+
+        if (memberList.checkMemberList(member)) {
+            loginMember = member;
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean registerMember() {
+        OutputView.IdAndPwInputMessage();
+        OutputView.PasswordWaringMessage();
+
+        Member member = new Member(inputId(), inputPw());
+
+        if (member.AllValidation()) {
+            memberList.addMember(member);
+            return true;
+        }
+        return false;
     }
 
     private void recordPage() {
         int appCommand;
 
-        if (!isLogin) {
-            return;
-        }
-
         do {
             OutputView.recordMessage();
             appCommand = InputView.inputIntValue();
-            record(appCommand);
-
-            if (!isLogin) {
-                return;
-            }
-
-        } while (true);
+            recordCommand(appCommand);
+        } while (isLogin);
     }
 
-    private void record(int appCommand) {
+    private void recordCommand(int appCommand) {
         Record record;
 
         if (appCommand == 1) {
@@ -80,76 +129,15 @@ class App {
             int index = InputView.inputIntValue();
             memberList.getMember(loginMember).deleteRecord(index);
         }
+
         if (appCommand == 5) {
             isLogin = false;
         }
+
         if (appCommand == 0) {
             OutputView.quitMessage();
             System.exit(0);
         }
-    }
-
-    //mainPage
-    private void mainPage() {
-        int appCommand;
-
-        do {
-            OutputView.MainViewMessage();
-            appCommand = InputView.inputIntValue();
-        } while (mainCommand(appCommand));
-    }
-
-    public boolean mainCommand(int appCommand) {
-        if (appCommand == 1) {
-            if (isMember()) {
-                String loginId = loginMember.getId();
-                OutputView.successLoginMessage(loginId);
-                return false;
-            }
-            OutputView.failLoginMessage();
-            return true;
-        }
-
-        if (appCommand == 2) {
-            if (registerMember()) {
-                OutputView.successRegisterMessage();
-                return true;
-            }
-            OutputView.failRegisterMessage();
-            return true;
-        }
-
-        if (appCommand == 0) {
-            quitProgram();
-        }
-
-        return false;
-    }
-
-    private boolean isMember() {
-        OutputView.loginMessage();
-        Member member = new Member(inputId(), inputPw());
-
-        if (memberList.checkMemberList(member)) {
-            loginMember = member;
-            return true;
-        }
-
-        return false;
-    }
-
-    //회원가입
-    private boolean registerMember() {
-        OutputView.IdAndPwInputMessage();
-        OutputView.PasswordWaringMessage();
-
-        Member member = new Member(inputId(), inputPw());
-
-        if (member.AllValidation()) {
-            memberList.addMember(member);
-            return true;
-        }
-        return false;
     }
 
     private String inputId() {
