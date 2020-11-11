@@ -1,5 +1,6 @@
 package account_book;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
@@ -66,6 +67,30 @@ class Member {
         recordList.deleteRecord(index);
     }
 
+    public List<Integer> searchBy(UseDate useDate) {
+        return recordList.searchByDate(useDate);
+    }
+
+    public List<Integer> searchBy(String value, int appCommand) {
+        if(appCommand == 2){
+            return recordList.searchByDetail(value);
+        }
+
+        if(appCommand == 4){
+            return recordList.searchByPayType(value);
+        }
+
+        return null;
+    }
+
+    public List<Integer> searchBy(int money) {
+        return recordList.searchByMoney(money);
+    }
+
+    public void printRecordsByIndex(List<Integer> searchList) {
+        this.recordList.printRecordsOfIndex(searchList);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -75,6 +100,7 @@ class Member {
         if (!(o instanceof Member)) {
             return false;
         }
+
         Member other = (Member) o;
 
         return other.id.equals(this.id) &&

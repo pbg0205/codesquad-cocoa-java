@@ -11,14 +11,11 @@ public class MemberList {
     }
 
     public boolean checkMemberList(Member compareVo){
-        boolean hasMember;
-
         for (Member member : memberList) {
             if(compareVo.equals(member)){
                 return true;
             }
         }
-
         return false;
     }
 
@@ -35,11 +32,5 @@ public class MemberList {
             }
         }
         return null;
-    }
-
-    public void printRecords(Member loginMember){
-        Member member = getMember(loginMember);
-
-
     }
 }

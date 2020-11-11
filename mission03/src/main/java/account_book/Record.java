@@ -1,48 +1,59 @@
 package account_book;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-
-class Record {
-    private static final String REGULAR_ExPRESSION_OF_NUMBER = "";//TODO 정규식
-
-    private Calendar calendar;
+class Record implements Comparable<Record> {
+    private UseDate useDate;
     private String detail;
     private int money;
+    private String payType;
 
-    public Record(String dateStr, String detail, int money) {
-        this.calendar = initDate(dateStr);//TODO 입력에 맞는 date 입력되도록 하기
+    public Record(String dateStr, String detail, int money, String payType) {
+        this.useDate = new UseDate(dateStr);
         this.detail = detail;
         this.money = money;
-    }
-
-    private Calendar initDate(String dateStr){
-        final String REGEULAR_REGEX_SPECIAL_CHARACTER= "[ ,.-]";
-
-        String[] date_str = dateStr.split(REGEULAR_REGEX_SPECIAL_CHARACTER);
-        Calendar calendar = Calendar.getInstance();
-
-        int year = Integer.parseInt(date_str[0]);
-        int month = Integer.parseInt(date_str[1]);
-        int date = Integer.parseInt(date_str[2]);
-
-        calendar.set(year, month, date);
-
-        return calendar;
+        this.payType = setPayType(payType);
     }
 
     public int getMoney() {
         return money;
     }
 
-    //TODO 날짜에 대한 validation method로 분리하기
-    //TODO 숫자에 대한 validation method로 생성해서 입력하기
+    private String setPayType(String payType) {
+        payType = payType.trim();
+
+        if (payType.equals("현금") || payType.equalsIgnoreCase("cash")) {
+            return "cash";
+        }
+
+        if (payType.equals("카드") || payType.equalsIgnoreCase("card")) {
+            return "card";
+        }
+
+        return null;
+    }
+
+    public boolean matchByUseDate(UseDate useDate) {
+        return this.useDate.equals(useDate);
+    }
+
+    public boolean matchByDetail(String detail) {
+        return this.detail.equals(detail);
+    }
+
+    public boolean matchByMoney(int money) {
+        return this.money == money;
+    }
+
+    public boolean matchByPayType(String payType){
+        return this.payType.startsWith(payType);
+    }
 
     @Override
     public String toString() {
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        String dFormat = sf.format(this.calendar.getTime());
+        return String.format("%25s %20s %20d %20s", this.useDate, this.detail, this.money, this.payType);
+    }
 
-        return String.format("%25s %20s %20d",dFormat, detail, money);
+    @Override
+    public int compareTo(Record other) {
+        return (this.useDate).compareTo(other.useDate);
     }
 }

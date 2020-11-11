@@ -53,20 +53,17 @@ public class OutputView {
 
     public static void recordMessage() {
         commandSelectionMessage();
-        createMessage();
-        readMessage();
-        updateMessage();
-        deleteMessage();
-        logOutMessage();
+        createCommandMessage();
+        readCommandMessage();
+        updateCommandMessage();
+        deleteCommandMessage();
+        logOutCommandMessage();
+        searchCommandMessage();
         exitMessage();
     }
 
     public static void PasswordWaringMessage() {
         System.out.println("(※비밀번호는 반드시 특수문자가 하나 이상 포함 되야 합니다.)");
-    }
-
-    public static void modifingIndexMessage(String commandName){
-        System.out.println(commandName+"할 인덱스를 설정해주세요");
     }
 
     public static void dateMessage(){
@@ -83,13 +80,17 @@ public class OutputView {
         System.out.println("(지출은 마이너스(-)로 입력해주세요.");
     }
 
+    public static void payTypeMessage() {
+        System.out.println("소비 유형을 입력해주세요.(현금 or 카드)");
+    }
+
     public static void IndexMessage(String commandName) {
         System.out.println(commandName+"할 인덱스를 입력해주세요.");
     }
 
     public static void recordListMessage(){
         System.out.println("======== 목록 ========");
-        System.out.printf("%5s %20s %20s %20s\n", "인덱스","날짜", "적요", "금액");
+        System.out.printf("%5s %20s %20s %20s %20s\n", "인덱스","날짜", "적요", "금액", "현금/카드");
     }
 
     private static void commandSelectionMessage() {
@@ -112,27 +113,48 @@ public class OutputView {
         System.out.println("0. 종료");
     }
 
-    private static void createMessage(){
+    private static void createCommandMessage(){
         System.out.println("1. 조회");
     }
 
-    private static void readMessage(){
+    private static void readCommandMessage(){
         System.out.println("2. 추가");
     }
 
-    private static void updateMessage(){
+    private static void updateCommandMessage(){
         System.out.println("3. 수정");
     }
 
-    private static void deleteMessage(){
+    private static void deleteCommandMessage(){
         System.out.println("4. 삭제");
     }
 
-    private static void logOutMessage(){
+    private static void logOutCommandMessage(){
         System.out.println("5.로그아웃");
+    }
+
+    private static void searchCommandMessage() {
+        System.out.println("6.검색");
     }
 
     public static void noRecordMessage() {
         System.out.println("조회할 목록이 존재하지 않습니다.");
+    }
+
+    public static void searchMainMessage() {
+        System.out.println("검색할 키워드를 선정해주세요.");
+        System.out.println("1. 날짜");
+        System.out.println("2. 적요");
+        System.out.println("3. 금액");
+        System.out.println("4. 소비 유형");
+    }
+
+    public static void searchMessage() {
+        System.out.println("검색할 내용을 입력해주세요.");
+        System.out.println("-날짜의 경우 형식을 지켜주세요.(ex.1990-01-01)");
+    }
+
+    public static void noCommandMessage() {
+        System.out.println("입력하신 명령어가 존재하지 않습니다.");
     }
 }
