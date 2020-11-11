@@ -1,7 +1,7 @@
 # Day6.미션 3 가계부 구현하기
->## 목록(Contents)
+## 목록(Contents)
 - (1) 3.가계부 구현하기
-- (3) TO-DO-LIST
+- (2) TO-DO-LIST
 <br/><br/>
 
 
@@ -187,3 +187,209 @@
     - 행동 : 메소드(method)
 - 사용자 정의 데이터 타입으로 선언이 가능하다.
 - 클래스 != 객체 : <u>객체는 클래스의 인스턴스화</u>한 대상을 일컫는 말이다.
+<br><br>
+
+# Day8. 미션 3 가계부 기능 추가
+## 목록(Contents)
+- (1) 총 합계 구현
+- (2) 소비 유형 추가(현금/카드)
+- (3) 날짜에 따른 오름차순 정렬
+    - Comparator
+    - Comparable
+- (4) 검색 기능 구현(날짜, 적요, 금액, 소비 유형)
+<br/><br/>
+
+> ###(1) 총 합계 구현
+
+RecordList.java
+
+    
+        private int getSumOfRecords() {
+            return recordList.stream().mapToInt(Record::getMoney).sum();
+        }
+ArrayList형태로 입력된 값을 stream을 사용해서 합산을 구하는 방식으로 구현했다.
+
+> What is Stream?
+
+ 스트림이란 '데이터의 흐름'입니다. <u>배열 또는 컬렉션 인스턴스의 함수의 조합들을 이용해 가공된 결과</u>를 받을 수 있습니다.
+ 또한 <u>람다를 이용해서 코드이 길이가 줄고</u> 배열과 <u>컬렉션을 함수형으로 처리</u>할 수 있습니다.   
+ 스트림은 세가지 작업으로 나눌 수 있습니다.
+ 1. 생성하기: 스트림 인스턴스 생성
+ 2. 가공하기: 필터링 및 맵핑등 원하는 결과를 만들기 위한 중간 작업
+ 3. 결과 만들기 : 최종적으로 결과를 만들어내는 작업
+ ````
+    전체 -> 맵핑 -> 필터링 1 -> 필터링 2 -> 결과 만들기 -> 결과물
+ ````   
+<br>
+
+[stream 참고 블로그]   
+- [Java 스트림 Stream (1) 총정리](https://futurecreator.github.io/2018/08/26/java-8-streams/)   
+- [Java 스트림 Stream (2) 고급](https://futurecreator.github.io/2018/08/26/java-8-streams-advanced/)
+<br/><br/>
+
+> ###(2) 소비 유형 추가(현금/카드)
+ Record.java
+
+        private String payType;
+
+소비 유형을 구현하기 위해 Record class의 인스턴수 변수로 선언했다. boolean isCash로 구현할지 고민 했다. 하지만 <u>코드 구현시
+ 의미가 불명확해질 것 같다는 생각이 들었다.</u> 그래서 의미를 좀더 구체적으로 하고자 <u>String payType 으로 선언</u>해 결제 
+ 방식을 구체적으로 의미를 받아들일 수 있도록 구현했다. 현재는 현금과 카드만 입력받는 경우에만 입력이 되도록 로직을 구현했지만
+  다른 결제 방식을 통한 결과 값 저장받을 수 있을 것이다.
+<br><br>
+> ###(3) 날짜에 따른 오름차 순 정렬
+
+Record.java
+
+    private Calendar calendar;
+ 
+ 기존 날짜 타입을 Calendar class로 입력받았다. 하지만 입력 날짜를 입력 받기 위해서는 SimpleDateFormat를 이용해야 하는 
+ 번거로움이 존재했고 Comparable을 이용해 값을 비교하는데 어려움이 있었다. 그래서 UseDate 클래스를 만들어 날짜를 직접 구현하기
+ 로 했다.
+ 
+ Record.java
+ 
+        private UseDate useDate;
+
+UseDate.java
+
+        private int year;
+        private int month;
+        private int date;
+        
+위와 같이 연, 월, 일을 관리를 별도로 관리하도록 구현했다. 위와 같이 구현한 이유는 연, 월, 일 기준으로 비교를 하기 위함이다.
+아래와 같이 함수형 프로그래밍을 이용해 Comparator 불변 필드를 선언했다.
+
+    private static final Comparator<UseDate> USE_DATE_COMPARATOR =
+            Comparator.comparingInt((UseDate ud) -> ud.year)
+            .thenComparing(ud -> ud.month)
+            .thenComparing(ud -> ud.date);
+            
+ Comparator는 기본 정렬과 다르게 정렬 기준을 세우고 싶은 경우 사용하는 인터페이스이다. Comparator는 유일하게 compare 함수를
+ 사용할 수 있다.   
+ <br><br>
+
+> ### compare 작성법    
+````
+    (1) 비교법
+    첫 번째 파라미터(x) > 두 번째 파라미터(y) : (+) 리턴 
+    첫 번째 파라미터(x) = 두 번째 파라미터(y) : (0) 리턴
+    첫 번째 파라미터(x) < 두 번째 파라미터(y) : (-) 리턴
+````
+
+[예시]
+````
+    @Override
+    public int compare(Point p1, Point p2){
+        if(p1.x > p2.x){
+            return 1; //x 오름차순 정렬
+        }
+
+        if(p1.x == p2.x){
+            if(p1.y > p2.y){
+                return -1; // y 내림차순 정렬
+            }
+        }
+
+        return -1;
+    }
+````
+
+위와 같은 방법을 이용하면 나만의 기준을 정렬로 한 코드를 구현할 수 있다.   
+계속해서 검색을 하다보니 함수형 프로그래밍을 이용한 Comparator를 사용하는 법을 알아냈다.
+````
+class UseDate implements Comparable<UseDate>{
+    private static final Comparator<UseDate> USE_DATE_COMPARATOR =
+            Comparator.comparingInt((UseDate ud) -> ud.year)
+            .thenComparing(ud -> ud.month)
+            .thenComparing(ud -> ud.date);
+...
+    
+    @Override
+    public int compareTo(UseDate other) {
+        return USE_DATE_COMPARATOR.compare(this, other);
+    }
+}
+````       
+가장 윗 부분을 확인해보자. comparingInt는 정수값을 비교하겠다는 의미이다. 오른 쪽의 (UseDate ud)는 UseDate의 타입인 ud 변수로
+하여 <u>우선 연도(year)를 비교해서 오름차순으로 정렬</u>하고 <u>월(month), 일(date)을 기준으로 비교하겠다는 의미</u>이다.
+ 이 코드를 보며 느낀 것은 함수형 프로그래밍으로 코드를 구현할 경우 의미를 파악하기 수월하다는 것이었다. 
+정렬 기준은 Comparable을 implement받아 compareTo를 구현하고 내부를 Comparator.compare을 통해 정렬 기준을 확립했다.
+ 
+```` 
+class Record implements Comparable<Record> {
+...
+    @Override
+    public int compareTo(Record other) {
+        return (this.useDate).compareTo(other.useDate);
+    }
+}
+````
+
+또한 날짜 기준으로 Record를 정렬해야 하므로 Record 클래스에 Comparable 및 날짜(UseDate)를 기준으로 오름차순 하도록
+구현하였다.
+
+#### [구현화면]
+````
+    ======== 목록 ========
+      인덱스                   날짜                   적요                   금액                현금/카드
+        0                1900-01-01                  바밤바                 -300                 cash
+        1                1900-01-01                  바밤바                 -200                 cash
+        2                1990-05-01                  택시비                -3000                 cash
+                                                                          -3500
+````
+위와 같이 결과 값이 잘 출력되는 것을 확인할 수 있다.
+<br><br>
+
+> ### (4) 검색 기능 구현(날짜, 적요, 금액, 소비 유형)
+ 검색 기능은 입력한 내용과 결과를 RecordList에서 비교 후, 결과에 대한 인덱스를 List로 반환하여 결과를 출력하는 방식으로 구현
+ 했다.   
+ App.java
+ 
+    private void searchByCategory(int appCommand) {
+    ...
+        //날짜 검색
+        if (appCommand == 1) {
+            UseDate useDate = new UseDate(InputView.inputStringValue());
+            searchList = loginMember.searchBy(useDate);
+        } 
+    ...
+    }
+ 
+ Member.java
+ 
+    public List<Integer> searchBy(UseDate useDate) {
+        return recordList.searchByDate(useDate);
+    }
+    
+ RecordList.java
+     
+     public List<Integer> searchBy(UseDate useDate) {
+         return recordList.searchByDate(useDate);
+     }
+     
+ Record.java
+     
+     public boolean matchByUseDate(UseDate useDate) {
+         return this.useDate.equals(useDate);
+     }
+
+해당 로직을 보면 다소 번거로워 보일 수 있다. 위와 같은 로직을 거쳐 처리한 이유는 Member class 내의 인스턴스 변수로
+RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 있다. <u>Record에서 직접 정보를 확인하면 되지 않나?</u>
+가능은 하다 하지만 객체지향 프로그래밍에서의 정보은닉에 대한 규칙에 위배된다.   
+그렇다면 왜 정보 은닉을 사용해야 하는걸까? [Effective Java](http://www.yes24.com/Product/Goods/65551284)에서는 정보 은닉의
+장점을 이렇게 이야기 하고 있다.
+````
+    1. 시스템 개발 속도를 높인다. 여러 컴포넌트를 병렬로 개발할 수 있기 때문이다.
+    2. 시스템 관리 비용을 낮춘다. 각 컴포넌트를 더 빨리 파악하여 디버깅할 수 있고, 다른 컴포넌트로 교체하는 부담도 적다.
+    3. 성능 최적화에 도움을 준다. 다른 컴포넌트에 영향을 주지 않고 해당 컴포넌트만 최적화할 수 있기 때문이다.
+    4. 소프트웨어 재사용성을 높인다. 외부에 거의 의존하지 않고 독자적으로 동작할 수 있는 컴포넌트라면 그 컴포넌트와 함께 개발되지 않은
+    낯선 환경에서도 유용하게 쓰일 가능성이 크기 때문이다.
+    5. 큰 시스템을 제작하는 난이도를 낮춰준다. 시스템 전체가 아직 완성되지 않은 상태에서도 개별 컴포넌트의 동작을 검증할 수 있기 때문이다.
+````
+아직 와닿지 않는 문장도 아직 있지만 4, 5번이 현재로서 와닿을 수 있는 내용인 것 같다. 위와 같은 내용 뿐만 아니라 객체는 자기 
+자신이 능동적으로 작동할 수 있는 권한이 있어야 한다. 그러기 위해서는 직접 값을 참조하는 행위는 지양해야 한다.   
+
+ RecordList 또한 직접 Record의 정보를 확인할 수 없기 때문에 Record에게 비교한 결과만 확인하기 위한 요청을 하게 된다.
+ Record는 비교 결과를 RecordList에게 전달해주고 그 결과를 기반으로 인덱스를 list에 담는다. 인덱스를 담은 리스트들은 App.java로 
+ 이동해서 인덱스 결과와 일치하는 정보를 반환한다.
