@@ -1,5 +1,6 @@
 package account_book;
 
+import java.io.IOException;
 import java.util.List;
 
 class App {
@@ -8,7 +9,17 @@ class App {
     private boolean isLogin;
 
     public App() {
-        memberList = new MemberList();
+        init();
+    }
+
+    public void init(){
+        CsvReader csvReader = new CsvReader();
+
+        try {
+            this.memberList = csvReader.getMemberListFromCsv();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void start() {
@@ -68,7 +79,7 @@ class App {
         OutputView.IdAndPwInputMessage();
         OutputView.PasswordWaringMessage();
 
-        Member member = new Member(inputId(), inputPw());
+        Member member = new Member(inputId(), inputPw(),inputBalance());
 
         if (member.AllValidation()) {
             memberList.addMember(member);
@@ -202,6 +213,11 @@ class App {
     private String inputPw() {
         OutputView.passwordInputMessage();
         return InputView.inputStringValue();
+    }
+
+    private int inputBalance(){
+        OutputView.balanceInputMessage();
+        return InputView.inputIntValue();
     }
 
     private void quitProgram() {
