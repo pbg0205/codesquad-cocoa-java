@@ -199,7 +199,7 @@
 - (4) 검색 기능 구현(날짜, 적요, 금액, 소비 유형)
 <br/><br/>
 
-> ###(1) 총 합계 구현
+>### (1) 총 합계 구현
 
 RecordList.java
 
@@ -227,7 +227,7 @@ ArrayList형태로 입력된 값을 stream을 사용해서 합산을 구하는 �
 - [Java 스트림 Stream (2) 고급](https://futurecreator.github.io/2018/08/26/java-8-streams-advanced/)
 <br/><br/>
 
-> ###(2) 소비 유형 추가(현금/카드)
+>### (2) 소비 유형 추가(현금/카드)
  Record.java
 
         private String payType;
@@ -236,7 +236,7 @@ ArrayList형태로 입력된 값을 stream을 사용해서 합산을 구하는 �
  의미가 불명확해질 것 같다는 생각이 들었다.</u> 그래서 의미를 좀더 구체적으로 하고자 <u>String payType 으로 선언</u>해 결제 
  방식을 구체적으로 의미를 받아들일 수 있도록 구현했다. 현재는 현금과 카드만 입력받는 경우에만 입력이 되도록 로직을 구현했지만
   다른 결제 방식을 통한 결과 값 저장받을 수 있을 것이다.
-<br><br>
+<br/><br/>
 > ###(3) 날짜에 따른 오름차 순 정렬
 
 Record.java
@@ -269,7 +269,7 @@ UseDate.java
  사용할 수 있다.   
  <br><br>
 
-> ### compare 작성법    
+>### compare 작성법    
 ````
     (1) 비교법
     첫 번째 파라미터(x) > 두 번째 파라미터(y) : (+) 리턴 
@@ -341,7 +341,7 @@ class Record implements Comparable<Record> {
 위와 같이 결과 값이 잘 출력되는 것을 확인할 수 있다.
 <br><br>
 
-> ### (4) 검색 기능 구현(날짜, 적요, 금액, 소비 유형)
+>### (4) 검색 기능 구현(날짜, 적요, 금액, 소비 유형)
  검색 기능은 입력한 내용과 결과를 RecordList에서 비교 후, 결과에 대한 인덱스를 List로 반환하여 결과를 출력하는 방식으로 구현
  했다.   
  App.java
@@ -393,3 +393,174 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
  RecordList 또한 직접 Record의 정보를 확인할 수 없기 때문에 Record에게 비교한 결과만 확인하기 위한 요청을 하게 된다.
  Record는 비교 결과를 RecordList에게 전달해주고 그 결과를 기반으로 인덱스를 list에 담는다. 인덱스를 담은 리스트들은 App.java로 
  이동해서 인덱스 결과와 일치하는 정보를 반환한다.
+ <br><br>
+ 
+ # Day9. 수업 내용 정리 및 추가 기능 구현
+ ## 목록(Contents)
+ - (1) String && StringBuffer
+ - (2) 객체 관련 추가 설명(enum, interface)
+ - (3) 접근 한정자
+ - (4) static + final
+ - (5) Collection framework
+    - 검색 기능
+    - 대소 비교
+ <br/><br/>
+ 
+> ### **(1) String && StringBuffer**
+>#### **[String]**
+>- **불변 객체(immutable object)**이다.
+>- **객체를 지웠다가 객체를 다시 생성하고 주소를 참조하는 방식을 반복**한다.
+>- 동작 방식 :**사용하지 않으면 garbage collector가 제거 → 객체 생성 → 주소 참조**
+>
+>#### **[StringBuffer]**
+>- **변경 가능 객체(객체 내부 수정이 가능**하다)
+>- **기존 객체의 값에 CRUD가 가능**하기 때문에 속도면에서 효율적이다.
+<br><br/>
+
+> ### **(2) 객체 관련 추가 설명(enum, interface)**
+>### **[enum]**
+>- 열거형을 의미하는 class의 종류이고 기업에서 정해져 있는 값을 처리하기 위한 방법에 유용한 방법이다.  
+>
+>### **[interface]**
+>- 인터페이스는 객체를 생성할 수 없다. <u>자바는 **다중 상속이 불가능**하기 때문에</u> 사용할 수 없다.
+> 하지만 인터페이스는 다른 프로그래밍 언어와 같이 <u>**다중 상속을 흉내내고 싶기 때문**</u>하다. 
+> 주로 interace 이름에 **-able**을 많이 사용한다.   
+>- <u>주로 기능을 정의하는 방식</u>으로 사용한다. 예를 들어, 날 수 있는, 잡아 먹을 수 있는 능력을 상속받아서 사용하는 경우에
+> 사용하기 위해서 인터페이스를 사용한다.
+>
+>#### **[자바의 메서드는 객체일까?]**
+>
+>- 자바는 함수를 람다식을 이용해서 객체처럼 사용할 수 있다.
+>- **함수형 프로그래밍** : <u>함수를 매개변수로 입력받아 값을 리턴하는 방식</u>을 구현할 수 있는 기능
+<br><br>
+
+
+>### **(3)접근 한정자**
+>
+>- private : 클래스 내부 (※일단 변수 범위를 설정 기준이 없으면 private로 시작하자)
+>- protected : 상속받은 클래스만 사용 가능
+>- default(package-private) : 해당 패키지 내에서만 사용가능
+>- public : 모든 접근자 사용가능
+<br><br>
+
+>### **(4) static + final**
+>### **[final 기능]** 
+> 1.final 사용 위치에 따라 의미가 다르다.
+> - final 변수 : **변경이 불가능한 값(상수)**이다.
+> - final class :  **해당 클래스는 상속할 수 없다.**
+> - final method : **Overriding(재정의)**할 수 없다.
+><br><br>
+>### [static 변수]
+> static 변수는 <u>클래스 전체에서 하나만 사용하는 변수</u>이다. 하나만 클래스에서 공용으로 사용한다. 
+>그러므로 **static 변수는 this를 사용하지 못한다**. 왜냐하면 <u>this의 의미는 **'객체 자기 자신'**</u>이기 때문이다.
+<br><br>
+
+>### (5) Collection framework
+>#### (1)검색 기능
+>   ```java
+>    //Java 8 이후 버전부터 가능
+>    for(var p : l){
+>        if(p.value = 999){
+>            System.out.println("찾았다.");
+>        }
+>    }
+>    
+>    //인덱스가 필요한 경우
+>    for(int i = 0; i < l.size(); i++){
+>        if(p.value = 999){
+>            System.out.println("찾았다");
+>        }
+>    }
+>    
+>    시간 복잡도 : O(n)
+>   ```
+> 해당 변수 값을 찾기 위한 방법이다. 원하는 입력 값에 따라 list를 순회하고 결과 값과 일치할 경우 해당 객체를 반환한다.
+>```java
+>//검색 기능 구현
+>
+>Point p = new Point(999, 999, 999);
+>
+>for(Point now : list){
+>	if(now.equals(now){
+>		System.out.println("찾았다");
+>	}
+>}
+>```
+> 이번에는 객체를 이용해 값을 검색하는 방법이다. 객체를 선언해서 검색 결과를 반환하고 싶지만 결과값이 반환되지 않는다.
+> 왜냐하면 <u>생성된 객체는 각각의 다른 주소값을 참조</u>하기 때문이다. 이를 해결하기 위해서 즉, <u>현실 세계와 같이
+> 두 값이 같은 것으로 판단하기 위해서는 equals를 재정의</u> 하도록 한다.
+>
+> ```java
+>  @Override
+>      public boolean equals(Object o) {
+>          if (this == o) {
+>              return true;
+>          }
+>  
+>          if (!(o instanceof Point)) {
+>              return false;
+>          }
+>  
+>          Point other = (Point) o;
+>  
+>          return other.x.equals(this.y) &&
+>                  other.x.equals((this.y));
+>      }
+>  ```
+> 위와 같이 해당 클래스에 equals를 재정의하여 논리적 동치성, 다시 말해 현실 세계와 같이 두 값이 같다는 기준을 설정할 수 있다.
+> 위 코드는 아래와 같은 로직으로 진행된다.
+> 1. 같은 클래스가 아닐 경우 두 객체를 다른 객체이다.
+> 2. Point의 부모 클래스가 아닐 경우 이 또한 둘은 다른 객체이다.
+> 3. 두 값의 기준은 x와 y가 같을 경우 두 객체가 같은 객체로 인식하자.
+>
+>위와 같이 같은 객체의 기준을 선정하면 객체값으로 검색하는 기능을 완성할 수 있다.
+><br><br>
+>#### (2) 대소 비교
+> 대소 비교를 하기 위해서는 두가지 interface를 알고 있어야 한다. (1)Comparable, (2) Comparator이다.
+>Comparable interface는 compareTo 메서드 하나만 가지고 있는 interface이다.
+>> Comparable interface
+>```java
+>class Point implements Comparable<Point>{
+>...
+>    @Override
+>    public compareTo(Point other){
+>        return this.x - other.x;
+>    }
+>}
+>```
+>위의 코드와 같이 해당 클래스에 Comparable을 implement를 받아 compareTo를 재정의 하였다. 위 코드는 x기준 오름차순 정렬이다.
+>compareTo method 작동원리는 아래와 같이 판단하면 편할 것 같다!
+>- this.x - other.x > 0 -> this(자기자신)이 더 큰 경우는 **오름차순 정렬**이다. 
+>- this.x - other.x == 0 -> this(자기자신)과 값이 같으므로 **동치 관계**이다. 
+>- this.x - other.x < 0 -> this(자기자신)이 작으므로 **내림차순 정렬**이다. 
+>
+>>Comparator interface
+>
+>```java
+>   class Point implements Comparator<Point>{
+>    ...
+>    @Override
+>    public compare(Point other){
+>        return this.x - other.x;
+>    }   
+>}
+>```
+>위 코드도 Comparable과 동일하게 implements 받아 compare을 재정의하는 방식으로 구현한다. 위 코드는 Comparable의 코드와 같이
+>x 오름차순 정렬을 구현한 내용이다.
+>
+>>일급 컬렉션(First Class Collection)
+>```java
+>Collections.sort(list,(Point p1, Point p2)->{
+>    return p2.value - p1.value
+>});
+>```
+> 위와 같은 방법은 람다식으로 표현한 방법이다. 기존의 자바의 경우 가장 아쉬운 점이 있었다. 바로 <u>함수를 매개변수로 사용하지
+>못한다는 점</u>이었다. 하지만 JAVA 8 부터 람다식이 도입되면서 <u>함수를 매개변수 형태로 사용할 수 있는 기능이 추가</u>되었다. 
+>- 일급 컬렉션 : Collection을 Wrapping하면서, 그 외 다른 멤버 변수가 없는 상태
+>- 이점
+>   - 비지니스에 종속적인 자료구조
+>   - Collection의 불변성 보장
+>   - 상태와 행위를 한 곳에 관리
+>   - 이름있는 컬렉션
+>
+>자세한 내용은 [일급 컬렉션의 소개와 써야할 이유(by.jojoldu)](https://jojoldu.tistory.com/412)내용을 참고해서 공부할 예정.
