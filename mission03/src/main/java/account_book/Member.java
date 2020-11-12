@@ -10,16 +10,27 @@ class Member {
 
     private String id;
     private String password;
+    private int balance;
     private RecordList recordList;
 
     public Member(String id, String password) {
         this.id = id;
         this.password = password;
+    }
+
+    public Member(String id, String password, int balance) {
+        this.id = id;
+        this.password = password;
+        this.balance = balance;
         this.recordList = new RecordList();
     }
 
     public String getId() {
         return id;
+    }
+
+    public int getBalance() {
+        return balance;
     }
 
     public boolean AllValidation() {
@@ -52,19 +63,22 @@ class Member {
     }
 
     public void printRecords() {
-        recordList.printRecords();
+        recordList.printRecords(this.balance);
     }
 
     public void insertRecord(Record record) {
         recordList.insertRecord(record);
+        this.balance = calculateBalance();
     }
 
     public void modifyRecord(int index, Record record) {
         recordList.modifyRecord(index, record);
+        this.balance = calculateBalance();
     }
 
     public void deleteRecord(int index) {
         recordList.deleteRecord(index);
+        this.balance = calculateBalance();
     }
 
     public List<Integer> searchBy(UseDate useDate) {
@@ -89,6 +103,10 @@ class Member {
 
     public void printRecordsByIndex(List<Integer> searchList) {
         this.recordList.printRecordsOfIndex(searchList);
+    }
+
+    public int calculateBalance(){
+        return recordList.calculateBalance(this.balance);
     }
 
     @Override

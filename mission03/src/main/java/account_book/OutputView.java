@@ -91,6 +91,7 @@ public class OutputView {
     public static void recordListMessage(){
         System.out.println("======== 목록 ========");
         System.out.printf("%5s %20s %20s %20s %20s\n", "인덱스","날짜", "적요", "금액", "현금/카드");
+        printDivider();
     }
 
     private static void commandSelectionMessage() {
@@ -156,5 +157,13 @@ public class OutputView {
 
     public static void noCommandMessage() {
         System.out.println("입력하신 명령어가 존재하지 않습니다.");
+    }
+
+    public static void balanceInputMessage() {
+        System.out.println("현재 재산을 입력해주세요.");
+    }
+
+    public static void printDivider() {
+        System.out.println("======================================================================================================");
     }
 }

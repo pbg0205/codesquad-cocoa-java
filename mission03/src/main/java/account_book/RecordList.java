@@ -11,14 +11,14 @@ public class RecordList {
         this.recordList = new ArrayList<>();
     }
 
-    public void printRecords() {
+    public void printRecords(int balance) {
         int recordsSize = this.recordList.size();
 
         if (recordsSize == 0) {
             OutputView.noRecordMessage();
             return;
         }
-        printRecord(recordsSize);
+        printRecord(balance);
     }
 
     public void printRecordsOfIndex(List<Integer> searchList) {
@@ -27,10 +27,12 @@ public class RecordList {
         }
     }
 
-    private void printRecord(int recordsSize) {
+    private void printRecord(int balance) {
+        int recordsSize = this.recordList.size();
+
         OutputView.recordListMessage();
         printEachRecord(recordsSize);
-        printSum();
+        printBalance(balance);
     }
 
     private void printEachRecord(int recordsSize) {
@@ -39,13 +41,17 @@ public class RecordList {
         }
     }
 
-    private void printSum() {
-        int sum = getSumOfRecords();
-        System.out.printf("%20s %5d\n", " ", sum);
+    private void printBalance(int balance) {
+        OutputView.printDivider();
+        System.out.printf("%-65s %5d\n", "남은 잔액", balance);
     }
 
-    private int getSumOfRecords() {
+    public int getSumOfRecords() {
         return recordList.stream().mapToInt(Record::getMoney).sum();
+    }
+
+    public int calculateBalance(int balance){
+        return balance + getSumOfRecords();
     }
 
     public void insertRecord(Record record) {
