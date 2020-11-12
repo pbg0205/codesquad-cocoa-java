@@ -540,13 +540,33 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 >   class Point implements Comparator<Point>{
 >    ...
 >    @Override
->    public compare(Point other){
+>    public int compare(Point other){
 >        return this.x - other.x;
 >    }   
 >}
 >```
 >위 코드도 Comparable과 동일하게 implements 받아 compare을 재정의하는 방식으로 구현한다. 위 코드는 Comparable의 코드와 같이
->x 오름차순 정렬을 구현한 내용이다.
+>x 오름차순 정렬을 구현한 내용이다.   
+>
+>```java
+>   class ComparatorY implements Comparator<Point>{
+>    @Override
+>    public int compare(Point other){
+>        return this.x - other.x;
+>    }
+>}
+>```
+>
+>또는 Comparator를 직접 class로 구현하는 방법도 있다. interface는 직접 객체를 생성할 수 없기 때문에 별도로 class를 정의해야
+>한다. 방법은 기존과 같다. Comparator를 implements한 후, compare를 재정의한다. 그렇다면 구현한 ComparatorY를 어떻게 사용하면
+>좋을까?
+>```java
+>Collections.sort(list, new ComparatorY());
+>``` 
+>이와 같이 Collections의 static 메서드에 추가적으로 입력을 해주도록 한다. 그렇다면 의미는 list를 comparatorY 기준으로 정렬하겠
+>다는 의미로 코드를 구성할 수 있다.   
+> 하지만 별도의 인스턴스를 생성하는 방법은 옛날 방법이고 코드의 직관성이 떨어진다. 이를 해결하고자하는 방법이 **일급 컬렉션(first
+>class collection)**이다.
 >
 >>일급 컬렉션(First Class Collection)
 >```java
