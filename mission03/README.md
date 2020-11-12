@@ -399,7 +399,7 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
  ## 목록(Contents)
  - (1) String && StringBuffer
  - (2) 객체 관련 추가 설명(enum, interface)
- - (3) 접근 한정자
+ - (3) 접근 제한자
  - (4) static + final
  - (5) Collection framework
     - 검색 기능
@@ -435,7 +435,7 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 <br><br>
 
 
->### **(3)접근 한정자**
+>### **(3)접근 제한자**
 >
 >- private : 클래스 내부 (※일단 변수 범위를 설정 기준이 없으면 private로 시작하자)
 >- protected : 상속받은 클래스만 사용 가능
@@ -481,7 +481,7 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 >Point p = new Point(999, 999, 999);
 >
 >for(Point now : list){
->	if(now.equals(now){
+>	if(p.equals(now){
 >		System.out.println("찾았다");
 >	}
 >}
@@ -493,10 +493,6 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 > ```java
 >  @Override
 >      public boolean equals(Object o) {
->          if (this == o) {
->              return true;
->          }
->  
 >          if (!(o instanceof Point)) {
 >              return false;
 >          }
@@ -509,9 +505,8 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 >  ```
 > 위와 같이 해당 클래스에 equals를 재정의하여 논리적 동치성, 다시 말해 현실 세계와 같이 두 값이 같다는 기준을 설정할 수 있다.
 > 위 코드는 아래와 같은 로직으로 진행된다.
-> 1. 같은 클래스가 아닐 경우 두 객체를 다른 객체이다.
-> 2. Point의 부모 클래스가 아닐 경우 이 또한 둘은 다른 객체이다.
-> 3. 두 값의 기준은 x와 y가 같을 경우 두 객체가 같은 객체로 인식하자.
+> 1. Point의 부모 클래스가 아닐 경우 이 또한 둘은 다른 객체이다.
+> 2. 두 값의 기준은 x와 y가 같을 경우 두 객체가 같은 객체로 인식하자.
 >
 >위와 같이 같은 객체의 기준을 선정하면 객체값으로 검색하는 기능을 완성할 수 있다.
 ><br><br>
@@ -565,8 +560,8 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 >``` 
 >이와 같이 Collections의 static 메서드에 추가적으로 입력을 해주도록 한다. 그렇다면 의미는 list를 comparatorY 기준으로 정렬하겠
 >다는 의미로 코드를 구성할 수 있다.   
-> 하지만 별도의 인스턴스를 생성하는 방법은 옛날 방법이고 코드의 직관성이 떨어진다. 이를 해결하고자하는 방법이 **일급 컬렉션(first
->class collection)**이다.
+> 하지만 별도의 인스턴스를 생성하는 방법은 옛날 방법이고 코드의 직관성이 떨어진다. 이를 해결하고자하는 방법이 <u>일급 컬렉션(first
+>class collection)</u>이다.
 >
 >>일급 컬렉션(First Class Collection)
 >```java
