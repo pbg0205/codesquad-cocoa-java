@@ -583,11 +583,11 @@ RecordList를 선언했기 때문이다. 여기서 의문점이 생길 수도 �
 >
 # Day10. Algorithm Day
  ## 목록(Contents)
- - (1) 나누어 떨어지는 숫자 배열 ([문제](https://programmers.co.kr/learn/courses/30/lessons/12910) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/divide_arr/Solution.java))
- - (2) 크레인 인형뽑기 게임 ([문제](https://programmers.co.kr/learn/courses/30/lessons/64061) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/doll/Solution.java))
- - (3) 두 개 뽑아서 더하기 ([문제](https://programmers.co.kr/learn/courses/30/lessons/68644) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/sum_of_two_number/Solution.java))
+ - (1) 나누어 떨어지는 숫자 배열 ([문제](https://programmers.co.kr/learn/courses/30/lessons/12910) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/programmers/divide_arr/Solution.java))
+ - (2) 크레인 인형뽑기 게임 ([문제](https://programmers.co.kr/learn/courses/30/lessons/64061) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/programmers/doll/Solution.java))
+ - (3) 두 개 뽑아서 더하기 ([문제](https://programmers.co.kr/learn/courses/30/lessons/68644) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/programmers/sum_of_two_number/Solution.java))
  - (4) 모의고사 ([문제](https://programmers.co.kr/learn/courses/30/lessons/42840) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/practice_test/Solution.java))
- - (5) 2016년 ([문제](https://programmers.co.kr/learn/courses/30/lessons/12901) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/year2016/Solution.java))
- - (6) 약수의 합 ([문제](https://programmers.co.kr/learn/courses/30/lessons/12928) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/sum_of_divisor/Solution.java))
+ - (5) 2016년 ([문제](https://programmers.co.kr/learn/courses/30/lessons/12901) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission03/src/main/java/algorithm/programmers/year2016/Solution.java))
+ - (6) 약수의 합 ([문제](https://programmers.co.kr/learn/courses/30/lessons/12928) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission03/src/main/java/algorithm/programmers/sum_of_divisor/Solution.java))
 
  <br/><br/>
