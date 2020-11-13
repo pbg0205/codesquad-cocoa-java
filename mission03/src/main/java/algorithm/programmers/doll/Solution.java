@@ -1,7 +1,13 @@
 package algorithm.programmers.doll;
+/*
+ * @problem     크레인 인형뽑기(프로그래머스)
+ * @url         https://programmers.co.kr/learn/courses/30/lessons/64061
+ * @author      cooper
+ * @created by  11.13.20
+ */
 
 import java.util.*;
-//TODO testcase1, 2 실패
+
 class Solution {
     public static void main(String[] args) {
         Solution solution = new Solution();
@@ -42,7 +48,9 @@ class Solution {
                     board[row][col] = 0;
                     break;
                 }
+
                 pickedNumber = -1;
+
             }
 
             if(pickedNumber < 0){
