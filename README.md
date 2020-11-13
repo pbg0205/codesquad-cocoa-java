@@ -12,3 +12,4 @@
 7. [Day7. 수업 정리 및 가계부 리팩토링](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission03#day7-%EC%88%98%EC%97%85-%EC%A0%95%EB%A6%AC-%EB%B0%8F-%EA%B0%80%EA%B3%84%EB%B6%80-%EB%A6%AC%ED%8C%A9%ED%86%A0%EB%A7%81)
 8. [Day8. 미션 3 가계부 기능 추가](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission03#day8-%EB%AF%B8%EC%85%98-3-%EA%B0%80%EA%B3%84%EB%B6%80-%EA%B8%B0%EB%8A%A5-%EC%B6%94%EA%B0%80)
 9. [Day9. 수업 정리(Collection framework)](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission03#day9-%EC%88%98%EC%97%85-%EB%82%B4%EC%9A%A9-%EC%A0%95%EB%A6%AC-%EB%B0%8F-%EC%B6%94%EA%B0%80-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84)
+10. [Day10. Algorithm Day](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission03#Day10.-Algorithm-Day)
