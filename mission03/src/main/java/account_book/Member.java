@@ -29,8 +29,17 @@ class Member {
         return id;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public int getBalance() {
         return balance;
+    }
+
+    public void loadRecordList(RecordList recordList){
+        this.recordList = recordList;
+        this.balance = this.recordList.calculateBalance(this.balance);
     }
 
     public boolean AllValidation() {
@@ -107,6 +116,14 @@ class Member {
 
     public int calculateBalance(){
         return recordList.calculateBalance(this.balance);
+    }
+
+    public StringBuilder getCsvRecords() {
+        return this.recordList.getCsvRecords();
+    }
+
+    public boolean sameWith(Member member){
+        return this.equals(member);
     }
 
     @Override

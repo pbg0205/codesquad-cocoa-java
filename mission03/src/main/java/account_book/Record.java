@@ -47,6 +47,10 @@ class Record implements Comparable<Record> {
         return this.payType.startsWith(payType);
     }
 
+    public String getCsvRecord (){
+        return String.format("%s,%s,%d,%s\n",this.useDate, this.detail, this.money, this.payType);
+    }
+
     @Override
     public String toString() {
         return String.format("%25s %20s %20d %20s", this.useDate, this.detail, this.money, this.payType);

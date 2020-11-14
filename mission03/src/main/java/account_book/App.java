@@ -1,25 +1,14 @@
 package account_book;
 
-import java.io.IOException;
 import java.util.List;
 
 class App {
-    private MemberList memberList;
+    private MemberDao memberDao;
     private Member loginMember;
     private boolean isLogin;
 
     public App() {
-        init();
-    }
-
-    public void init(){
-        CsvReader csvReader = new CsvReader();
-
-        try {
-            this.memberList = csvReader.getMemberListFromCsv();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.memberDao = new MemberDao();
     }
 
     public void start() {
@@ -40,7 +29,7 @@ class App {
             }
             OutputView.failLoginMessage();
         }
-
+        //TODO : 회원가입 실패 원인을 바깥으로 빼는 것 고려하기
         if (appCommand == 2) {
             if (registerMember()) {
                 OutputView.successRegisterMessage();
@@ -67,8 +56,8 @@ class App {
         OutputView.loginMessage();
         Member member = new Member(inputId(), inputPw());
 
-        if (memberList.checkMemberList(member)) {
-            loginMember = member;
+        if (memberDao.hasMember(member)) {
+            loginMember = memberDao.getMemberData(member);
             return true;
         }
 
@@ -81,11 +70,16 @@ class App {
 
         Member member = new Member(inputId(), inputPw(),inputBalance());
 
-        if (member.AllValidation()) {
-            memberList.addMember(member);
-            return true;
+        if(memberDao.hasMember(member)){
+            return false;
         }
-        return false;
+
+        if (!member.AllValidation()) {
+            return false;
+        }
+
+        memberDao.addMember(member);
+        return true;
     }
 
     private void recordPage() {
@@ -102,12 +96,12 @@ class App {
         Record record;
         //1.조회
         if (appCommand == 1) {
-            memberList.getMember(loginMember).printRecords();
+            loginMember.printRecords();
         }
         //2.추가
         if (appCommand == 2) {
             record = inputRecord();
-            memberList.getMember(loginMember).insertRecord(record);
+            loginMember.insertRecord(record);
         }
         //3.수정
         if (appCommand == 3) {
@@ -116,16 +110,18 @@ class App {
             int index = InputView.inputIntValue();
             record = inputRecord();
 
-            memberList.getMember(loginMember).modifyRecord(index, record);
+            loginMember.modifyRecord(index, record);
         }
         //4.삭제
         if (appCommand == 4) {
             OutputView.IndexMessage("삭제");
             int index = InputView.inputIntValue();
-            memberList.getMember(loginMember).deleteRecord(index);
+            loginMember.deleteRecord(index);
         }
         //5.로그아웃
         if (appCommand == 5) {
+            StringBuilder sb = loginMember.getCsvRecords();
+            new RecordDao(loginMember.getId()).saveRecords(loginMember);
             isLogin = false;
         }
         //6. 검색
@@ -142,7 +138,6 @@ class App {
     }
 
     private void searchByCategory(int appCommand) {
-        loginMember = memberList.getMember(loginMember);
         List<Integer> searchList = null;
 
         OutputView.searchMessage();
@@ -180,8 +175,7 @@ class App {
     }
 
     private void matchByIndex(List<Integer> searchList) {
-        Member member = memberList.getMember(loginMember);
-        member.printRecordsByIndex(searchList);
+        loginMember.printRecordsByIndex(searchList);
     }
 
     private Record inputRecord() {

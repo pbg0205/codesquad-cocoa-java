@@ -11,6 +11,16 @@ public class RecordList {
         this.recordList = new ArrayList<>();
     }
 
+    public StringBuilder getCsvRecords() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Record record : recordList) {
+            stringBuilder.append(record.getCsvRecord());
+        }
+
+        return stringBuilder;
+    }
+
     public void printRecords(int balance) {
         int recordsSize = this.recordList.size();
 
