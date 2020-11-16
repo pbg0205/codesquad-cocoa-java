@@ -71,9 +71,8 @@ class Application extends Thread {
 
         for (File file : files) {
             String fileName = file.getName();
-            long totalSpace = file.getTotalSpace();//TODO 저장 용량 내용 찾아보기
-
             String fileInfoAsString = String.format("%20s%20d", fileName, totalSpace);
+
             System.out.println(fileInfoAsString);
         }
     }
