@@ -41,7 +41,7 @@
          tmp_dir        
 ```
 
-####( 4) cd(change directory)
+#### (4) cd(change directory)
 1. cd .. : 상위 디렉토리로 이동
 ```
     D:\codes\codesquad_cocoa_java> cd ..    
@@ -52,7 +52,7 @@
     D:\codes> cd codesquad_cocoa_java
 ```
 
-##2. shell command
+## 2. shell command
 ### (1) cd(change directory)
 - 가장 많이 쓰는 명령어 중 하나이다. cd 뒤에 이동하고 싶은 디렉토리 경로를 입력합니다.
  ```
@@ -64,7 +64,7 @@
  ```
 <br>
 
-###( 2) ls(list)
+### (2) ls(list)
 - 디렉토리에 속한 파일 및 디렉토리를 나열하는 명렁어.
 ```
     (1)ls              // 현재 디렉토리의 내용 출력
