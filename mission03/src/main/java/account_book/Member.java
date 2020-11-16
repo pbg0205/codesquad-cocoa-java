@@ -42,7 +42,7 @@ class Member {
         this.balance = this.recordList.calculateBalance(this.balance);
     }
 
-    public boolean AllValidation() {
+    public boolean isAllValid() {
         if (hasNullOfId()) {
             return false;
         }
@@ -57,7 +57,7 @@ class Member {
     public boolean hasNullOfId() {
         String id = this.id.trim();
 
-        if (this.id.equals("") || this.id == null) {
+        if (id.equals("") || id == null) {
             return true;
         }
 
@@ -65,10 +65,7 @@ class Member {
     }
 
     public boolean isPasswordType() {
-        if (REGULAR_EXPRESSION_OF_PASSWORD.matcher(this.password).find()) {
-            return true;
-        }
-        return false;
+        return REGULAR_EXPRESSION_OF_PASSWORD.matcher(this.password).find();
     }
 
     public void printRecords() {

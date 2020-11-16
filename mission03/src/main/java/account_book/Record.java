@@ -20,15 +20,23 @@ class Record implements Comparable<Record> {
     private String setPayType(String payType) {
         payType = payType.trim();
 
-        if (payType.equals("현금") || payType.equalsIgnoreCase("cash")) {
+        if (isCashType(payType)) {
             return "cash";
         }
 
-        if (payType.equals("카드") || payType.equalsIgnoreCase("card")) {
+        if (isCardType(payType)) {
             return "card";
         }
 
         return null;
+    }
+
+    private boolean isCashType(String payType) {
+        return payType.equals("현금") || payType.equalsIgnoreCase("cash");
+    }
+
+    private boolean isCardType(String payType) {
+        return payType.equals("카드") || payType.equalsIgnoreCase("card");
     }
 
     public boolean matchByUseDate(UseDate useDate) {

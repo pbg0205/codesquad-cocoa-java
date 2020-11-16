@@ -68,13 +68,13 @@ class App {
         OutputView.IdAndPwInputMessage();
         OutputView.PasswordWaringMessage();
 
-        Member member = new Member(inputId(), inputPw(),inputBalance());
+        Member member = new Member(inputId(), inputPw(), inputBalance());
 
-        if(memberDao.hasMember(member)){
+        if (memberDao.hasMember(member)) {
             return false;
         }
 
-        if (!member.AllValidation()) {
+        if (!member.isAllValid()) {
             return false;
         }
 
@@ -209,7 +209,7 @@ class App {
         return InputView.inputStringValue();
     }
 
-    private int inputBalance(){
+    private int inputBalance() {
         OutputView.balanceInputMessage();
         return InputView.inputIntValue();
     }
