@@ -8,8 +8,4 @@ class InputView {
     static String inputAsString(){
         return scanner.nextLine();
     }
-
-    private static int toInt(String value){
-        return Integer.parseInt(value);
-    }
 }
