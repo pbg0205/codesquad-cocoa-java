@@ -302,3 +302,67 @@ ex) chmod 765 file
    [사용자는 r-x] - 읽기,     , 실행
   권한을 부여하겠다는 의미. 
 ```
+# Day12. 강의 및 정리(by.호눅스)
+## 목록(Contents)
+- (1) 수업 내용
+- (2) 추가 구현 수정
+<br/><br/>
+
+## 1. 수업 내용 
+> #### 1. What is Map?
+- Map interface : Collection FrameWork의 인터페이스의 하나로서 Key, Value를 쌍으로 묶어서 저장하는 자료구조이다.
+Map 인터페이스를 구현한 클래스로는 HashTable, HashMap, LinkedHashMap, SortedMap, TreeMap 등이 있다.
+- Map의 Key, Value는 Reference type을 입력받아야 한다.(long : **primitive type** / Long: **Wrapper type**)
+- HashMap의 시간 복잡도 : O(1) (최악의 경우 O(n)이 될 수도 있다.)
+<br><br>
+
+> auto boxing & auto unboxing
+- 오토 박싱(auto boxing) : 컴파일러에 의해 primitive type이 wrapper type으로 자동 변환되는 것.
+```java
+    public class AutoBoxing_Test {
+        public static void main(String[] args) {
+            Integer num = 17;
+            int n = num;
+            System.our.println(n);
+        }    
+    }
+```
+- 오토 언박싱 : wrapper type의 결과를 primitive type으로 형변환 해주는 것.
+```java
+    public class AutoUnBoxing_Test {
+    List<Integer> list = new Arraylist<>();
+    list.add(10);
+    list.add(20);
+    
+    int firstNumber = (int)list.get(0);
+}
+```
+
+> Wrapper class
+- 기본 자료타입(primitive type)을 객체(refrence type)로 다루기 위해 사용하는 클래스
+```
+    wrapper class의 종료
+    primitive   reference
+    byte        Byte
+    char        Character
+    int         Integer
+    float       Float
+    double      Double
+    boolean     Boolean
+    long        Long
+    short       Short
+```
+
+> null check
+- 1.조건문에 != null 표시를 입력하는 방식
+```java
+    if(h != null) {
+        System.out.println(h.name);
+    }
+```
+
+- 2.@Optional을 처리하는 방식
+- **이 부분은 추후 업데이트하도록 하겠습니다!**
+
+> 프로세스 & 쓰레드
+- **이 부분 또한 추후 업데이트하도록 하겠습니다!**
