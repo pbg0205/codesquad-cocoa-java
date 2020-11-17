@@ -5,9 +5,10 @@ import java.nio.file.Paths;
 
 class Application extends Thread {
     private Path path;
-
+    private HistoryCommand history;
     public Application() {
         this.path = Paths.get(System.getProperty("user.dir"));
+        this.history = new HistoryCommand();
     }
 
     @Override
@@ -23,6 +24,8 @@ class Application extends Thread {
         String[] commands = commandLine.split(" ");
         String command = commands[0];
 
+        history.pushHistory(commandLine);
+
         if (command.startsWith("pwd")) {
             new pwdCommand().printWorkingDirectory(this.path);
         }
@@ -37,6 +40,10 @@ class Application extends Thread {
 
         if (command.startsWith("mkdir")) {
             new MkdirCommand().makeDirectory(commands, path);
+        }
+
+        if(command.startsWith("history")) {
+            history.excuteCommand(commandLine);
         }
 
         if (command.startsWith("exit")) {
