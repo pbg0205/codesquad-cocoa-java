@@ -21,15 +21,15 @@ public class HistoryCommand {
 
         option_tmp = commands[1];
 
-        if(option_tmp.startsWith("-c")) {
+        if (option_tmp.startsWith("-c")) {
             option = option_tmp;
-        }else {
+        } else {
             this.option = "";
         }
     }
 
     public void pushHistory(String command) {
-        if(command.equals("history -c")){
+        if (command.equals("history -c")) {
             command = "history";
         }
 
@@ -42,11 +42,11 @@ public class HistoryCommand {
 
         checkOption(commandLine);
 
-        if(this.option.equals("-c")) {
+        if (this.option.equals("-c")) {
             removeAllhistory();
         }
 
-        while(!stack_tmp.isEmpty()) {
+        while (!stack_tmp.isEmpty()) {
             System.out.printf("%d %s\n", index++, stack_tmp.pop());
         }
     }

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 class CdCommand {
     private Path path;
 
-    public CdCommand(Path path){
+    public CdCommand(Path path) {
         this.path = path;
     }
 
@@ -34,14 +34,14 @@ class CdCommand {
         String fileName = file.getName();
         String subPath;
 
-        if(hasDirectory(fileName, directoryPath)){
-            subPath = path.toString()+ "\\" + file.getName();
+        if (hasDirectory(fileName, directoryPath)) {
+            subPath = path.toString() + "\\" + file.getName();
             this.path = Paths.get(subPath);
         }
     }
 
     private Path changeParentDirectory() {
-        if(this.path.getParent() == null){
+        if (this.path.getParent() == null) {
             return this.path;
         }
         return this.path.getParent();

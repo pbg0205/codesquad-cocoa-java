@@ -1,11 +1,17 @@
 package shell;
 
+import calendar.SquadCalendar;
+import hangul.Checker;
+import hangul.HangulClock;
+import hangul.Time;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 class Application extends Thread {
     private Path path;
     private HistoryCommand history;
+
     public Application() {
         this.path = Paths.get(System.getProperty("user.dir"));
         this.history = new HistoryCommand();
@@ -42,18 +48,31 @@ class Application extends Thread {
             new MkdirCommand().makeDirectory(commands, path);
         }
 
-        if(command.startsWith("history")) {
+        if (command.startsWith("history")) {
             history.excuteCommand(commandLine);
         }
 
-        if(command.startsWith("cat")) {
+        if (command.startsWith("cat")) {
             new CatCommand(commandLine, this.path).execute();
+        }
+
+        if (command.startsWith("hclock")) {
+            Time time = new Time();
+            Checker checker = new Checker();
+            HangulClock hangulClock = new HangulClock();
+
+            checker.checkTime(time);
+            hangulClock.printHangulClock(checker);
+        }
+
+        if (command.startsWith("cal")) {
+            SquadCalendar squadCalendar = new SquadCalendar();
+            squadCalendar.printCalendar();
         }
 
         if (command.startsWith("exit")) {
             System.exit(0);
         }
-
     }
 
     private void printPath() {

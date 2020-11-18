@@ -5,7 +5,7 @@ import java.nio.file.Path;
 
 class MkdirCommand {
     public void makeDirectory(String[] commands, Path path) {
-        if(commands.length == 1){
+        if (commands.length == 1) {
             return;
         }
 
@@ -16,7 +16,7 @@ class MkdirCommand {
         initCreateNewFile(directoryPath);
     }
 
-    private void initCreateNewFile(String path){
+    private void initCreateNewFile(String path) {
         File file = new File(path);
         file.mkdir();
     }

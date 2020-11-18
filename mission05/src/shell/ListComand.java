@@ -129,18 +129,21 @@ class ListComand {
     }
 
     private String getPermissionType(File file) {
+        boolean isDirectory = file.isDirectory();
         boolean isExecutable = file.canExecute();
         boolean isReadable = file.canRead();
         boolean isWritable = file.canWrite();
 
-        return getPermissionAsString(isReadable, isExecutable, isWritable);
+        return getPermissionAsString(isDirectory, isReadable, isExecutable, isWritable);
     }
 
-    private String getPermissionAsString(boolean isReadable,
+    private String getPermissionAsString(boolean isDirectory,
+                                         boolean isReadable,
                                          boolean isExecutable,
                                          boolean isWritable) {
         String permission = "";
 
+        permission = check(permission, isDirectory, "d");
         permission = check(permission, isReadable, "r");
         permission = check(permission, isWritable, "w");
         permission = check(permission, isExecutable, "x");
@@ -149,9 +152,9 @@ class ListComand {
     }
 
     private String check(String permission, boolean isContain, String mark) {
-        if(isContain){
+        if (isContain) {
             permission += mark;
-        }else {
+        } else {
             permission += "-";
         }
         return permission;

@@ -33,17 +33,23 @@ public class CatCommand {
     }
 
     private void initPath(Path path, String command) {
-        String path_tmp;
-        if (pathPrevAsString == null) {
-            path_tmp = path.toString() + "\\" + command;
-            pathPrevAsString = path_tmp;
-            return ;
+        String path_tmp = path.toString() + "\\" + command;
+        insertPath(path_tmp);
+    }
+
+    private void insertPath(String pathAsString) {
+        if (this.pathPrevAsString == null) {
+            this.pathPrevAsString = pathAsString;
+            return;
         }
 
-        if (pathNextAsString == null) {
-            path_tmp = path.toString() + "\\" + command;
-            pathNextAsString = path_tmp;
+        if (this.pathNextAsString == null) {
+            this.pathNextAsString = pathAsString;
         }
+    }
+
+    private void pathValidationMessage() {
+        System.out.println("Invalid Path");
     }
 
     private void checkOption(String command) {
@@ -56,12 +62,16 @@ public class CatCommand {
         try {
             this.fileReader = new FileReader(pathAsString);
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            pathValidationMessage();
         }
     }
 
     private void initBufferedReader() {
-        this.bufferedReader = new BufferedReader(this.fileReader);
+        try {
+            this.bufferedReader = new BufferedReader(this.fileReader);
+        } catch (Exception e) {
+            return;
+        }
     }
 
     private void connectionFile(String pathAsString) {
@@ -70,8 +80,10 @@ public class CatCommand {
     }
 
     public void execute() {
-        checkDirectory(pathPrevAsString);
-        checkDirectory(pathNextAsString);
+        if (!(hasPath(this.pathPrevAsString) ||
+                hasPath(this.pathNextAsString))) {
+            return;
+        }
 
         if (hasOption()) {
             executeWithOption();
@@ -79,12 +91,41 @@ public class CatCommand {
         }
 
         try {
-            printLine(this.pathPrevAsString);
-            printLine(this.pathNextAsString);
+            concatenate(this.pathPrevAsString);
+            concatenate(this.pathNextAsString);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //명령어 설정하기
+    }
+
+    private void executeWithOption() {
+        try {
+            concatenateWithNoption(this.pathPrevAsString);
+            concatenateWithNoption(this.pathNextAsString);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private boolean hasPath(String pathAsString) {
+        if (pathAsString == null) {
+            return false;
+        }
+        return !(pathAsString.equals(""));
+    }
+
+    private boolean checkDirectory(String path) {
+        File file = new File(path);
+
+        if (isDirectory(file)) {
+            printDirectoryMessage(file);
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isDirectory(File file) {
+        return file.isDirectory();
     }
 
     private void printDirectoryMessage(File file) {
@@ -92,43 +133,52 @@ public class CatCommand {
         System.out.printf("%s is Directory\n", directoryName);
     }
 
-    private void checkDirectory(String path) {
-        File file = new File(path);
-
-        if (!(isDirectory(file))) {
-            printDirectoryMessage(file);
+    private void concatenateWithNoption(String pathAsString) throws IOException {
+        if (!hasPath(pathAsString)) {
             return;
         }
-    }
 
-    private boolean isDirectory(File file) {
-        return file.isDirectory();
-    }
-
-    private void executeWithOption() {
-        try {
-            printLineWithRowNum(this.pathPrevAsString);
-            printLineWithRowNum(this.pathNextAsString);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (checkDirectory(pathAsString)) {
+            return;
         }
-    }
-
-    private void printLineWithRowNum(String pathAsString) throws IOException {
-        String line;
-        int rowCount = 0;
 
         connectionFile(pathAsString);
+
+        if (this.bufferedReader == null) {
+            return;
+        }
+
+        printLineWithRowNum();
+    }
+
+    private void printLineWithRowNum() throws IOException {
+        String line;
+        int rowCount = 0;
 
         while ((line = this.bufferedReader.readLine()) != null) {
             System.out.printf("%d %s\n", ++rowCount, line);
         }
     }
 
-    private void printLine(String pathAsString) throws IOException {
-        String line;
+    private void concatenate(String pathAsString) throws IOException {
+        if (!hasPath(pathAsString)) {
+            return;
+        }
+
+        if (checkDirectory(pathAsString)) {
+            return;
+        }
 
         connectionFile(pathAsString);
+
+        if (this.bufferedReader == null) {
+            return;
+        }
+        printAllLine();
+    }
+
+    private void printAllLine() throws IOException {
+        String line;
 
         while ((line = this.bufferedReader.readLine()) != null) {
             System.out.println(line);
@@ -136,13 +186,13 @@ public class CatCommand {
     }
 
     private boolean hasOption() {
-        if(!containValue()) {
+        if (!containOption()) {
             return false;
         }
         return (this.option.equals(CAT_OPTION));
     }
 
-    private boolean containValue() {
+    private boolean containOption() {
         return (this.option != null);
     }
 }
