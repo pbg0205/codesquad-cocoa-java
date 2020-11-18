@@ -27,7 +27,7 @@ class Application extends Thread {
         history.pushHistory(commandLine);
 
         if (command.startsWith("pwd")) {
-            new pwdCommand().printWorkingDirectory(this.path);
+            new PwdCommand().printWorkingDirectory(this.path);
         }
 
         if (command.startsWith("cd")) {
@@ -46,9 +46,14 @@ class Application extends Thread {
             history.excuteCommand(commandLine);
         }
 
+        if(command.startsWith("cat")) {
+            new CatCommand(commandLine, this.path).execute();
+        }
+
         if (command.startsWith("exit")) {
             System.exit(0);
         }
+
     }
 
     private void printPath() {
