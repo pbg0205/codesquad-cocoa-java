@@ -20,9 +20,7 @@ public class SquadCalendar {
     private void makeCalendar() {
         this.nowCalendar = Calendar.getInstance();
 
-        int year = nowCalendar.get(Calendar.YEAR);
         int startColumn = nowCalendar.get(Calendar.DAY_OF_WEEK);
-        int month = nowCalendar.get(Calendar.MONTH) + 1;
         int lastDay = nowCalendar.getActualMaximum(Calendar.DATE) + 1;
 
         insertDate(startColumn, lastDay);
