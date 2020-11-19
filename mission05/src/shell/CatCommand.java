@@ -58,23 +58,23 @@ public class CatCommand {
         }
     }
 
-    private void initFileReader(String pathAsString) {
+    private void initFileReader(String pathAsString) throws FileNotFoundException {
         try {
             this.fileReader = new FileReader(pathAsString);
-        } catch (FileNotFoundException e) {
-            pathValidationMessage();
+        }catch (FileNotFoundException fe) {
+            throw fe;
         }
     }
 
-    private void initBufferedReader() {
+    private void initBufferedReader() throws NullPointerException {
         try {
             this.bufferedReader = new BufferedReader(this.fileReader);
-        } catch (Exception e) {
-            return;
+        } catch (NullPointerException ne) {
+            throw ne;
         }
     }
 
-    private void connectionFile(String pathAsString) {
+    private void connectionFile(String pathAsString) throws FileNotFoundException, NullPointerException {
         initFileReader(pathAsString);
         initBufferedReader();
     }
@@ -86,7 +86,7 @@ public class CatCommand {
         }
 
         if (hasOption()) {
-            executeWithOption();
+            concatenateWithOption();
             return;
         }
 
@@ -98,7 +98,7 @@ public class CatCommand {
         }
     }
 
-    private void executeWithOption() {
+    private void concatenateWithOption() {
         try {
             concatenateWithNoption(this.pathPrevAsString);
             concatenateWithNoption(this.pathNextAsString);
@@ -142,13 +142,12 @@ public class CatCommand {
             return;
         }
 
-        connectionFile(pathAsString);
-
-        if (this.bufferedReader == null) {
-            return;
+        try {
+            connectionFile(pathAsString);
+            printLineWithRowNum();
+        } catch (NullPointerException | FileNotFoundException e) {
+            pathValidationMessage();
         }
-
-        printLineWithRowNum();
     }
 
     private void printLineWithRowNum() throws IOException {
@@ -169,12 +168,12 @@ public class CatCommand {
             return;
         }
 
-        connectionFile(pathAsString);
-
-        if (this.bufferedReader == null) {
-            return;
+        try {
+            connectionFile(pathAsString);
+            printAllLine();
+        } catch (FileNotFoundException | NullPointerException e) {
+            pathValidationMessage();
         }
-        printAllLine();
     }
 
     private void printAllLine() throws IOException {
