@@ -305,7 +305,7 @@ try/catch문을 작성하였습니다.
 > **hclock, cal은 추후 업로드할 예정입니다.**
 
 
-## Java IO
+## Day14.Java IO
 
 ---
 
@@ -316,7 +316,7 @@ try/catch문을 작성하였습니다.
 <br><br>
 >### What is Stream?
 
-![스트림]([https://www.slipp.net/wiki/download/attachments/12189761/stream.bmp?version=1&modificationDate=1368461094000&api=v2](https://www.slipp.net/wiki/download/attachments/12189761/stream.bmp?version=1&modificationDate=1368461094000&api=v2))
+![스트림](https://camo.githubusercontent.com/ea9837fe663e8f85e0044887438c8d2e16b5b863ade340d569734958fefba247/68747470733a2f2f7777772e736c6970702e6e65742f77696b692f646f776e6c6f61642f6174746163686d656e74732f31323138393736312f73747265616d2e626d703f76657273696f6e3d31266d6f64696669636174696f6e446174653d31333638343631303934303030266170693d7632)
 
 - #### steam(스트림) : 데이터를 운반하는데 사용되는 연결통로
     - 스트림은 단방향으로만 통신이 가능하다.
