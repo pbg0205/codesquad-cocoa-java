@@ -17,3 +17,4 @@
 12. [Day12. 수업 정리(Map & Thread)](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission05#day12-%EA%B0%95%EC%9D%98-%EB%B0%8F-%EC%A0%95%EB%A6%ACby%ED%98%B8%EB%88%85%EC%8A%A4)
 13. [Day13. 미션 6 한글시계, 캘린더 구현](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission06#day13%EB%AF%B8%EC%85%98-6-%ED%95%9C%EA%B8%80-%EC%8B%9C%EA%B3%84-%EC%BA%98%EB%A6%B0%EB%8D%94-%EB%A7%8C%EB%93%A4%EA%B8%B0)
 14. [Day14. 수업정리(Java IO)](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission06#day14.java-io)
+14. [Day15. Algorithm Day](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/README.md#day15-algorithm-day)
