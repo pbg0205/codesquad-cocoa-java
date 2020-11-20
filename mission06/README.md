@@ -371,3 +371,16 @@ try/catch문을 작성하였습니다.
     (추상 클래스를 사용한 이유 : <u>입출력의 대상에 따라 읽고 쓰는 방식이 다를 것</u>이기 때문에)
 
 - ex) 글자 끝에 Reader, Writer가 붙어있음.
+
+# Day15. Algorithm Day
+## 목록(Contents)
+- (1) grading ([문제](https://www.hackerrank.com/challenges/grading/problem) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/src/algorithm/hackerrank/grading/Solution.java))
+- (2) compare-the-triplets ([문제](https://www.hackerrank.com/challenges/compare-the-triplets/problem) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/src/algorithm/hackerrank/compare_the_triplets/Solution.java))
+- (3) a-very-big-sum ([문제](https://www.hackerrank.com/challenges/a-very-big-sum/problem) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/src/algorithm/hackerrank/verybigsum/Solution.java))
+- (4) time-conversion ([문제](https://www.hackerrank.com/challenges/time-conversion/problem) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/src/algorithm/hackerrank/timeconversion/Solution.java))
+- (5) kangaroo ([문제](https://www.hackerrank.com/challenges/kangaroo/problem) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/src/algorithm/hackerrank/kangaroo/Solution.java))
+<br>
+<br>
+##소감
+ 영어로 된 알고리즘을 풀어봐서 새로웠다.   
+영어공부 좀 하자.(진지)
