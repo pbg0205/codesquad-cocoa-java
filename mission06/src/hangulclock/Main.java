@@ -2,14 +2,10 @@ package hangulclock;
 
 public class Main {
     public static void main(String[] args) {
-        Time time = new Time();
-        Checker checker = new Checker();
-        HangulClock hangulClock = new HangulClock();
+        HangulClockThread hangulClockThread = new HangulClockThread();
+        QuitThread quitThread = new QuitThread();
 
-        checker.checkTime(time);
-        hangulClock.printHangulClock(checker);
-
-        SquadCalendar squadCalendar = new SquadCalendar();
-        squadCalendar.printCalendar();
+        hangulClockThread.start();
+        quitThread.start();
     }
 }
