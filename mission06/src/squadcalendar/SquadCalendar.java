@@ -1,4 +1,4 @@
-package hangulclock;
+package squadcalendar;
 
 import java.util.Calendar;
 
