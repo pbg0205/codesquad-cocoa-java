@@ -19,19 +19,19 @@ class Application extends Thread {
         setCommand(InputView.inputCommand());
 
         if (command == Command.UP) {
-            board.moveUp();
+            board.moveToUp();
         }
 
         if (command == Command.DOWN) {
-            board.moveDown();
+            board.moveToUnder();
         }
 
         if (command == Command.LEFT) {
-
+            board.moveToLeft();
         }
 
         if (command == Command.RIGHT) {
-
+            board.moveToRight();
         }
 
         board.printMapStatus();

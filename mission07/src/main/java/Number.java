@@ -12,10 +12,6 @@ public class Number {
         this.number *= 2;
     }
 
-    public boolean isMaxNumber() {
-        return this.number == MAX_NUMBER;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Number)){
