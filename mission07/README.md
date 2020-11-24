@@ -285,3 +285,141 @@ class Board{
  이런 식으로 진행하면 가장 위에서 보셨던 것과 같은 장면을 보실 수 있을겁니다.   
   별거 없는 내용에 장황하게 써놓았지만 아직 연습중이라는 점을 이해해주시고 이런식으 코드를 작성했구나 정도로만 
 봐주시면 감사하겠습니다.
+<br><br><br>
+
+# Day17.수업 정리 및 자바 메모장 만들기
+## 목록(Contents)
+- (1) 수업 정리
+    - What is AWT?
+    - 수업 코드
+- (2) 자바 메모장 만들기
+    - 메뉴바 만들기
+    - 파일 저장 기능
+    - 파일 불러오기 기능
+> ## 1.**수업 정리**
+
+> ### (1) What is AWT?
+ ```
+ - GUI(Graphic User Interface)   
+ 사용자가 그래픽을 통해서 하드웨어와 상호작용하는 환경.
+ - AWT(Abstract Window ToolKit)는
+  GUI 어플리케이션의 개발에 필요한 여러 개의 관련 패키지와 클래스의 집합
+ - 플랫폼(PlatForm)
+  컴퓨터 시스템의 기본이 되는 특정 프로세서 모델과 하나의 컴퓨터 시스템을
+  바탕으로 하는 운영체제  
+ ```
+1. ATW는 플랫폼 의존성을 띄고 있다.
+GUI 컴포넌트를 직접 구현하지 않고 OS의 컴포넌트를 사용한다.
+(↔ 반면에, swing class는 **플랫폼 독립적**이다.)  
+ 
+    - **플랫폼 독립성** : 특정 운영체제나 기계에 의존적이지 않는 것을 의미.( 플랫폼 의존성)
+
+2. SWING은 AWT의 확장형이다.
+    - AWT보다 풍부한 기능의 컴포넌트를 제공함
+    - JVM 기반으로 설치되어 있는 네이티브 플랫폼에 의존한다.(**OS에 의존X**)
+
+3. AWT vs SWING
+    - 성능 : AWT > SWING → AWT는 플랫폼 독립성을 포기하고, 속도를 선택
+    - 코딩 : AWT < SWING → AWT보다 다양한 컴포넌트를 만들어야 해서 코딩할 요소 많음.
+    - 학습 : AWT > SWING → AWT 먼저 학습하고 SWING을 공부하자.
+
+> ### (2) 수업 코드
+```java     
+    class Test1 extends Frame {...}
+``` 
+ 일반적으로는 Frame class을 extends로 확장받아 구현하는 방식으로 시작한다. 
+```java
+clas Test1{
+    public Test1() {
+        initUI();
+    }
+
+    private void initUI() {
+        setTitle("Week4 App");
+        setSize(640, 480); /* 1. dimension 객체 사용   2. 좌표 사용 */
+    }
+}
+```
+생성자를 통해서 Frame의 Title과 size를 사용하는 방법니다. size 설정하는 방법은 (1) dimesion 객체를 사용하거나, (2) 좌표를 사용하는
+방법이 있다.
+```java
+class Test1{
+    public Test1() {
+        addButton();
+    }
+    
+     private void addButton() {
+         b = new Button("Click me if you can");
+         b.setSize(100, 30);
+         b.setLocation(this.getWidth() / 2, this.getHeight() / 2);
+         b.addActionListener((ActionEvent e) -> { /* 1. Listener를 생성한다. */
+             System.out.println(e.getActionCommand());
+         });
+         add(b);
+     }   
+}
+```
+해당 내용을 button을 추가하는 메서드를 생성자에 선언해서 인스턴스 생성과 동시에 버튼을 생성하도록 하는 방법이다. 
+메서드 addButton은    
+(1) 버튼 생성   
+(2) 사이즈 설정   
+(3) 위치 설정   
+(4) 리스너 처리   
+(5) frame에 추가   
+방식으로 진행된다. 그리고 리스너를 처리하는 방식은 크게 3가지로 존재한다.
+
+1.  addListener에 익명 클래스를 처리하는 방식
+```
+    b.addActionListener(new WindowListener(){
+        @Override
+        public void windowOpnend(WindowEvent e) {
+        
+        }
+    }
+```
+
+2. addListener에 람다를 사용하는 방식
+```
+    b.addActionListener((ActionEvent e) -> {
+        System.out.println(e.getActionCommand());
+    });
+```
+- 장점 : 훨씬 코드가 간결하면서 보기 편한다.
+- 단점 : 람다는 모르면 사용하기 어렵다.
+3. Listener 사용방법
+```java
+           @Override
+            public void windowClosing(WindowEvent e) { /* windowEvent 객체 형태로 입력 받아서 명령을 처리한다 */
+                System.out.println("닫힘버튼 눌렸니?");
+                dispose();
+                /* e.getWindow().dispose() 형태로 사용이 필요없는 이유 :
+                 *       프레임의 내부 함수와 멤버변수를 받았기 때문에(Closable)
+                 */
+                System.out.println("프로그램을 종료합니다.");
+                System.exit(0);
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+
+            }
+            ....(구현 메서드들)
+        });
+```
+- 단점 : 모든 메서드들을 구현해야 한다.
+4. Adapter 사용방법
+```
+    b.addActionListener(new MyAdapter() {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            System.out.println("프로그램을 종료합니다.");
+            System.exit(0);
+        }     
+   });
+```
+- 장점 : 모든 메서드들을 정의할 필요없이 원하는 부분만 구현하면 된다.
+- 왜냐하면 adapter의 메서드들은 비어있는 메서드이기 때문이다.
+
+> ## (2) 자바 메모장 만들기
+
+> 해당 내용을 소스 코드로 대체합니다. → [[소스코드]](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/notepad/NoteView.java)
