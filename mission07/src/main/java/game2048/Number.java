@@ -1,3 +1,5 @@
+package game2048;
+
 import java.util.Objects;
 
 public class Number {
@@ -18,10 +20,6 @@ public class Number {
 
     public void multiply() {
         this.number *= 2;
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     @Override

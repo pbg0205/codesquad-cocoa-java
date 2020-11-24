@@ -1,3 +1,5 @@
+package game2048;
+
 class Application extends Thread {
     private Board board;
     private Command command;
@@ -46,7 +48,7 @@ class Application extends Thread {
     }
 
     private void checkFinish() {
-        if (board.isFinish()) {
+        if (!board.haveLocation()) {
             System.out.println("자리가 존재하지 않습니다.");
             exitMessage();
         }

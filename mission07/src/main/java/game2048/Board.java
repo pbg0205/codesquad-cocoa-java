@@ -1,3 +1,5 @@
+package game2048;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -239,62 +241,43 @@ class Board {
      * 승리 조건 탐색
      */
     public boolean checkHaving2048() {
-        boolean has2048 = false;
         for (int row = 0; row < RANGE_MAX; row++) {
-            has2048 = iterateColumn(row);
+            if(has2048InRow(row)){
+                return true;
+            }
         }
-
-        return has2048;
+        return false;
     }
 
-    private boolean iterateColumn(int row) {
-        boolean has2048 = false;
-
+    private boolean has2048InRow(int row) {
         for (int col = 0; col < RANGE_MAX; col++) {
-            has2048 = check2048(row, col);
+            if(check2048(row, col)){
+                return true;
+            };
         }
-
-        return has2048;
+        return false;
     }
 
     private boolean check2048(int row, int col) {
         return this.numberArray[row][col].is2048();
     }
 
-    public boolean isFinish() {
-        Queue<Number> queue = new LinkedList<>();
-        int[] dx = {1, 0, -1, 0};
-        int[] dy = {0, 1, 0, -1};
-
-        final int DIRECTION_MAX = 4;
-
-        queue.add(this.numberArray[0][0]);
-
-        while (!queue.isEmpty()) {
-            Number thisNumber = queue.poll();
-
-            for (int index = 0; index < DIRECTION_MAX; index++) {
-                int nx = thisNumber.getNumber() + dx[index];
-                int ny = thisNumber.getNumber() + dy[index];
-
-                if (isZero(nx, ny)) {
-                    return false;
-                }
-
-                if (isBoundary(nx, ny)) {
-                    queue.add(this.numberArray[nx][ny]);
-                }
+    public boolean haveLocation() {
+        for (int row = 0; row < RANGE_MAX; row++) {
+            if(hasLocationInRow(row)){
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
-    private boolean isBoundary(int x, int y) {
-        return ((0 <= x) && (x < RANGE_MAX)) && ((0 <= y) && (y < RANGE_MAX));
-    }
-
-    private boolean isZero(int row, int col) {
-        return this.numberArray[row][col].equals(Number.zero());
+    private boolean hasLocationInRow(int row) {
+        for (int col = 0; col < RANGE_MAX; col++) {
+            if(checkZero(row, col)){
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean checkZero(int row, int col) {
