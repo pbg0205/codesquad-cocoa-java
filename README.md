@@ -19,3 +19,4 @@
 14. [Day14. 수업정리(Java IO)](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission06#day14.java-io)
 15. [Day15. Algorithm Day](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission06/README.md#day15-algorithm-day)
 16. [Day16. 미션7. 2048 게임](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission07#day16%EB%AF%B8%EC%85%98-7-2048%EA%B2%8C%EC%9E%84)
+17. [Day17. 수업 정리 및 자바 메모장 구현](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission07#day17%EC%88%98%EC%97%85-%EC%A0%95%EB%A6%AC-%EB%B0%8F-%EC%9E%90%EB%B0%94-%EB%A9%94%EB%AA%A8%EC%9E%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
