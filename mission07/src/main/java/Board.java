@@ -17,8 +17,8 @@ class Board {
             initColumn(row);
         }
 
-        makeNumber(2);
-        makeNumber(4);
+        generateNumber(2);
+        generateNumber(4);
     }
 
     private void initColumn(int row) {
@@ -27,7 +27,7 @@ class Board {
         }
     }
 
-    private void makeNumber(int number) {
+    private void generateNumber(int number) {
         boolean initNumber = false;
         int row;
         int col;
@@ -82,10 +82,6 @@ class Board {
         }
     }
 
-    private boolean isSameNumber(Number thisNumber, Number otherNumber) {
-        return thisNumber.equals(otherNumber);
-    }
-
     /*
      * 아래로 이동
      */
@@ -94,7 +90,6 @@ class Board {
             checkDownwardMovement(col);
         }
     }
-
     private void checkDownwardMovement(int col) {
         Queue<Number> queue = new LinkedList<>();
 
@@ -133,7 +128,6 @@ class Board {
             checkLeftMovement(row);
         }
     }
-
     private void checkLeftMovement(int row) {
         Queue<Number> queue = new LinkedList<>();
 
@@ -203,6 +197,11 @@ class Board {
     /*
      * 두 수가 같을 경우, 두 수를 합산합니다.
      */
+
+    private boolean areSameNumbers(Number thisNumber, Number otherNumber) {
+        return thisNumber.equals(otherNumber);
+    }
+
     private Queue<Number> checkMultiply(Queue<Number> queue) {
         Queue<Number> queue_temp = new LinkedList<>();
         Number firstNumber;
@@ -219,7 +218,7 @@ class Board {
         while (!queue.isEmpty()) {
             secondNumber = queue.peek();
 
-            if (isSameNumber(firstNumber, secondNumber)) {
+            if (areSameNumbers(firstNumber, secondNumber)) {
                 firstNumber.multiply();
             } else {
                 queue_temp.add(firstNumber);
