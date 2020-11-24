@@ -204,7 +204,7 @@ class Board{
         for (int row = 0; row < RANGE_MAX; row++) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(new Number(0))) {
+            if (thisNumber.equals(Number.zero())) {
                 continue;
             }
             queue.add(thisNumber);
@@ -275,7 +275,7 @@ class Board{
                 continue;
             }
 
-            this.numberArray[row++][col] = new Number(0);
+            this.numberArray[row++][col] = Number.zero();
         }
     }
 }

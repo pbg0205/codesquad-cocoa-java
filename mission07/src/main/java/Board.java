@@ -23,11 +23,11 @@ class Board {
 
     private void initColumn(int row) {
         for (int col = 0; col < RANGE_MAX; col++) {
-            this.numberArray[row][col] = new Number(0);
+            this.numberArray[row][col] = Number.zero();
         }
     }
 
-    private void generateNumber(int number) {
+    public void generateNumber(int number) {
         boolean initNumber = false;
         int row;
         int col;
@@ -36,7 +36,7 @@ class Board {
             row = RandomCreator.create();
             col = RandomCreator.create();
 
-            if (this.numberArray[row][col].equals(new Number(0))) {
+            if (this.numberArray[row][col].equals(Number.zero())) {
                 this.numberArray[row][col] = new Number(number);
                 initNumber = true;
             }
@@ -58,7 +58,7 @@ class Board {
         for (int row = 0; row < RANGE_MAX; row++) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(new Number(0))) {
+            if (thisNumber.equals(Number.zero())) {
                 continue;
             }
             queue.add(thisNumber);
@@ -78,7 +78,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row++][col] = new Number(0);
+            this.numberArray[row++][col] = Number.zero();
         }
     }
 
@@ -90,13 +90,14 @@ class Board {
             checkDownwardMovement(col);
         }
     }
+
     private void checkDownwardMovement(int col) {
         Queue<Number> queue = new LinkedList<>();
 
         for (int row = RANGE_MAX - 1; row >= 0; row--) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(new Number(0))) {
+            if (thisNumber.equals(Number.zero())) {
                 continue;
             }
 
@@ -116,7 +117,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row--][col] = new Number(0);
+            this.numberArray[row--][col] = Number.zero();
         }
     }
 
@@ -128,13 +129,14 @@ class Board {
             checkLeftMovement(row);
         }
     }
+
     private void checkLeftMovement(int row) {
         Queue<Number> queue = new LinkedList<>();
 
         for (int col = 0; col < RANGE_MAX; col++) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(new Number(0))) {
+            if (thisNumber.equals(Number.zero())) {
                 continue;
             }
 
@@ -154,7 +156,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row][col++] = new Number(0);
+            this.numberArray[row][col++] = Number.zero();
         }
     }
 
@@ -170,7 +172,7 @@ class Board {
         for (int col = RANGE_MAX - 1; col >= 0; col--) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(new Number(0))) {
+            if (thisNumber.equals(Number.zero())) {
                 continue;
             }
 
@@ -183,21 +185,20 @@ class Board {
     private void moveElementsToRight(Queue<Number> queue, int row) {
         int col = RANGE_MAX - 1;
 
-        while(col >= 0) {
-            if(!queue.isEmpty()) {
+        while (col >= 0) {
+            if (!queue.isEmpty()) {
                 Number number = queue.poll();
-                this.numberArray[row][col--] =  number;
+                this.numberArray[row][col--] = number;
                 continue;
             }
 
-            this.numberArray[row][col--] = new Number(0);
+            this.numberArray[row][col--] = Number.zero();
         }
     }
 
     /*
-     * 두 수가 같을 경우, 두 수를 합산합니다.
+     * 두 수가 같을 경우, 두 수를 합산.
      */
-
     private boolean areSameNumbers(Number thisNumber, Number otherNumber) {
         return thisNumber.equals(otherNumber);
     }
@@ -226,12 +227,78 @@ class Board {
             }
             queue.poll();
 
-            if(queue.isEmpty()) {
+            if (queue.isEmpty()) {
                 queue_temp.add(firstNumber);
             }
         }
 
         return queue_temp;
+    }
+
+    /*
+     * 승리 조건 탐색
+     */
+    public boolean checkHaving2048() {
+        boolean has2048 = false;
+        for (int row = 0; row < RANGE_MAX; row++) {
+            has2048 = iterateColumn(row);
+        }
+
+        return has2048;
+    }
+
+    private boolean iterateColumn(int row) {
+        boolean has2048 = false;
+
+        for (int col = 0; col < RANGE_MAX; col++) {
+            has2048 = check2048(row, col);
+        }
+
+        return has2048;
+    }
+
+    private boolean check2048(int row, int col) {
+        return this.numberArray[row][col].is2048();
+    }
+
+    public boolean isFinish() {
+        Queue<Number> queue = new LinkedList<>();
+        int[] dx = {1, 0, -1, 0};
+        int[] dy = {0, 1, 0, -1};
+
+        final int DIRECTION_MAX = 4;
+
+        queue.add(this.numberArray[0][0]);
+
+        while (!queue.isEmpty()) {
+            Number thisNumber = queue.poll();
+
+            for (int index = 0; index < DIRECTION_MAX; index++) {
+                int nx = thisNumber.getNumber() + dx[index];
+                int ny = thisNumber.getNumber() + dy[index];
+
+                if (isZero(nx, ny)) {
+                    return false;
+                }
+
+                if (isBoundary(nx, ny)) {
+                    queue.add(this.numberArray[nx][ny]);
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean isBoundary(int x, int y) {
+        return ((0 <= x) && (x < RANGE_MAX)) && ((0 <= y) && (y < RANGE_MAX));
+    }
+
+    private boolean isZero(int row, int col) {
+        return this.numberArray[row][col].equals(Number.zero());
+    }
+
+    private boolean checkZero(int row, int col) {
+        return this.numberArray[row][col].equals(Number.zero());
     }
 
     /*
@@ -251,6 +318,6 @@ class Board {
     }
 
     private void printStatus(int row, int col) {
-        System.out.printf("%2s", numberArray[row][col]);
+        System.out.printf("%5s", numberArray[row][col]);
     }
 }

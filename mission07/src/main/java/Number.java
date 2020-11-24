@@ -8,8 +8,20 @@ public class Number {
         this.number = number;
     }
 
+    public static Number zero(){
+        return new Number(0);
+    }
+
+    public boolean is2048() {
+        return this.number == MAX_NUMBER;
+    }
+
     public void multiply() {
         this.number *= 2;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override

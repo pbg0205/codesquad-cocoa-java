@@ -34,7 +34,29 @@ class Application extends Thread {
             board.moveToRight();
         }
 
+        checkWinner();
+        checkFinish();
+    }
+
+    private void checkWinner() {
+        if (board.checkHaving2048()) {
+            System.out.println("승리하셨습니다!");
+            exitMessage();
+        }
+    }
+
+    private void checkFinish() {
+        if (board.isFinish()) {
+            System.out.println("자리가 존재하지 않습니다.");
+            exitMessage();
+        }
+        board.generateNumber(2);
         board.printMapStatus();
+    }
+
+    private void exitMessage() {
+        System.out.println("게임을 종료합니다.");
+        System.exit(0);
     }
 
     private void setCommand(String command_str) {
