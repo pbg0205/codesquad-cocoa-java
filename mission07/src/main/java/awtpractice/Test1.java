@@ -1,6 +1,7 @@
 package awtpractice;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.lang.reflect.InvocationTargetException;
@@ -21,15 +22,9 @@ class Test1 extends Frame {
     private void addEvent() {
         System.out.println("Add Event Listener");
         //별도의 클래스를 선언하지 않고 위와 같은 방법을 사용하는 이유?
-        addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-
-            }
-
-            // callback method : 내가 호출하지 않고 남이 실행하는 메서드.
-            // (개발자가 직접 호출하지 않고 JVM이나 OS에서 호출하는 메서드)
-            // 또한, 비동신 메서드 콜(async method call)이라고 한다.
+        addWindowListener(new MyAdapter() {
+            // Adapter를 사용하는 이유 : 모든 Overring 함수를 비어있는 형태로 구현되어 있는 형태이다.
+            // Adapter를 사용하면 원하는 Overring을 할 수 있다.
             @Override
             public void windowClosing(WindowEvent e) { /* windowEvent 객체 형태로 입력 받아서 명령을 처리한다 */
                 System.out.println("닫힘버튼 눌렸니?");
@@ -39,31 +34,6 @@ class Test1 extends Frame {
                  */
                 System.out.println("프로그램을 종료합니다.");
                 System.exit(0);
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-
             }
         });
     }
