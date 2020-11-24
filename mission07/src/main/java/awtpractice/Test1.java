@@ -1,17 +1,29 @@
 package awtpractice;
 
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 import java.lang.reflect.InvocationTargetException;
 
 /* Frame은 주로 extends로 확장해서 사용한다. */
 /* implement 하는 방식 : 원하는 코드를 작성하는 방법이다. */
 class Test1 extends Frame {
+
+    private Button b;
+
     public Test1() {
         initUI();
+        addButton();
         addEvent();
+    }
+
+    private void addButton() {
+        b = new Button("Click me if you can");
+        b.setSize(100, 30);
+        b.setLocation(this.getWidth() / 2, this.getHeight() / 2);
+        b.addActionListener((ActionEvent e) -> { /* 1. Listener를 생성한다. */
+            System.out.println(e.getActionCommand());
+        });
+        add(b);
     }
 
     private void initUI() {
