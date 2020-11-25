@@ -45,6 +45,10 @@ class Board {
         }
     }
 
+    public int getNumber(int row, int col) {
+        return this.numberArray[row][col].getNumber();
+    }
+
     /*
      * 위로 이동
      */

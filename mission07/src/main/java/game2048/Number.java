@@ -22,6 +22,10 @@ public class Number {
         this.number *= 2;
     }
 
+    public int getNumber() {
+        return number;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof Number)){
