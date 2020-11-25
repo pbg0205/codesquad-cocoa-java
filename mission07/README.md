@@ -423,3 +423,154 @@ class Test1{
 > ## (2) 자바 메모장 만들기
 
 > 해당 내용을 소스 코드로 대체합니다. → [[소스코드]](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/notepad/NoteView.java)
+
+# Day18.미션 8 2048 UI 구현하기 + 그림판 선그리기
+## 목록(Contents)
+(1) 구현영상  
+(2) 그림판 선그리기
+<br><br>
+> ###(1) 구현영상   
+![캡처](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/docs/images/2048.PNG)
+ [코드는 여기!](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission07/src/main/java/game2048)   
+  전에 한번 스터디를 하면서 Java GUI를 처음 접해보게 되었는데 이렇게 다시 접하게 될 줄 몰랐다. 그 때도 미숙한 코드를 가지고 
+  어떻게든 달력을 만들어볼려고 아등바등하던 때가 엊그제 같은데 지금 코드스쿼드에 와서 2048게임을 만들고 있다니 그래도 기쁘다.
+ 아직 AWT와 SWING부분을 적용해본 적이 많지 않아서 아직도 직접 코드로 구현해볼 때 어려움이 따르는게 사실이었다. 그리고 기존에
+ 콘솔 기반으로 프로그래밍을 작업했을 때는 어렵지만 클래스 분류를 하는 방식이 쉬었는데 이번 GUI의 경우 Frame에 add를 하는 경우에
+ 기존에 있는 타입이 아니면 add가 되지 않는 현상이 있서 별도로 클래스를 분류하는 것이 어려워 이번 단계에서는 GameView class에
+ GUI 코드와 승리 조건에 대한 코드를 추가되었다. 서당개로 살아온 입장에서 객체는 최대한 하나의 책임을 가지고 행동할 수 있도록
+ 구현해야 한다고 들었지만 아직까지 자바의 길은 멀기만 하지만 아직 더 공부해보고 싶다.   
+ 
+### [여기서부터 코드 정리]
+  
+ ```java
+class GameView extends Frame {
+    private static final int ARRAY_RANGE_MAX = 4;
+    private Board board; 
+    
+    private Label[][] labels;
+    private Font font;
+```
+ 우선적으로 해당 클래스는 GUI 구현을 목적으로 작성한 클래스이다. 그런데 초코칩같이 사이에 박혀있는 내부 로직에 대한 점은 꾸준히
+ 학습해서 하나씩 빼낼 예정이다. 아직 많이 부족하다. 다시 집중하고 코드를 보자.   
+  이전에 2048게임을 콘솔에 구현한 버전에서 게임판을 Number[][] 형태의 이차원 배열로 선언했다. GUI 또한 이와 같이 이차원 배열로
+  표현하는 것이 코드를 구현하는데 있어 혼돈할 요소과 줄어들 것 같아 Label[][] 이차원 배열로 선언했다. 그리고 글씨체를 조금 더
+  다듬기 위해 Font를 사용했다. 
+     
+ ```java
+class GameView extends Frame {
+    public GameView() {
+        initFrame();
+        initFont();
+        initBoard();
+        setLabels();
+        initEvent();
+    }    
+}
+```
+  우선 내가 처음 구현하면서 생각한 방식은
+ 1. Frame을 초기화한다.
+ 2. Label을 초기화 한다.
+ 3. 명령어가 입력되는 과정에서 Label을 계속해서 갱신된다.   
+
+그렇다면 아래와 같은 코드를 어떻게 구현했는지 확인해보자.
+
+```java
+class GameView extends Frame {
+    private void initFrame() {
+        setTitle("2048");
+        setSize(640, 480);
+        setLayout(new GridLayout(ARRAY_RANGE_MAX, ARRAY_RANGE_MAX, 30, 30));
+        setLocation(getWidth() / 2, getHeight() / 2);
+        setVisible(true);
+    }
+}
+```
+Frame은 기본적으로 3가지 과정을 거쳐야 한다.
+1. 생성(extends Frame(혹은 생성자 선언방식))
+2. 크기 설정(setSize())
+3. 보이기(setVisible())
+
+나머지는 이 기본적인 과정에 조금 더 이뻐보이기 위해서 작업한 것으로 생각하면 편하다.
+setLayOut의 경우 Frame 내부의 컴포넌트들을 어떤 식으로 정렬해서 보여줄 것인지에 대한 내용이고,
+setLocation의 경우 컴포넌트의 위치를 설정하는 메서드이다.
+
+```java
+class GameView extends Frame {
+    private void setLabels() {
+        this.labels = new Label[ARRAY_RANGE_MAX][ARRAY_RANGE_MAX];
+
+        for (int row = 0; row < ARRAY_RANGE_MAX; row++) {
+            initLabel(row);
+        }
+    }
+
+    private void initLabel(int row) {
+        for (int col = 0; col < ARRAY_RANGE_MAX; col++) {
+            String value = String.valueOf(board.getNumber(row, col));
+            labels[row][col] = new Label(value);
+            setLabelDetail(row, col);
+        }
+        pack();
+    }
+
+    private void setLabelDetail(int row, int col) {
+        labels[row][col].setSize(50, 50);
+        labels[row][col].setAlignment(Label.CENTER);
+        labels[row][col].setFont(font);
+
+        add(labels[row][col]);
+    }
+}
+```
+
+Labels는 이전에 이야기한 것과 같이 board 클래스 내부의 이차원 배열과 똑같은 형태로 표현하기
+위해서 동일하게 이차원 배열을 사용해서 값을 초기화하는 과정이다. 또한 내부 열에 해당하는 부분에 도착하면 
+그 부분을 board의 위치한 숫자와 동일한 값으로 초기화시키고 세부내용을 조정(좀 더 꾸미는) 코드를 작성한 것이다.
+가장 큰 단점은 나에게는 뛰어난 미적 감각이 존재하지 않기 때문에 기본에 충실하려고 노력하면서 코드를 작성했다.
+```java
+class GameView extends Frame {    
+    private void initEvent() {
+        addCommand();
+        addExitEvent();
+    }
+}
+```
+컴포넌트의 세팅을 완성한 후, 이제 동작에 대한 설정을 해야 한다. 2048게임은 기존 FPS 움직임 방식(AWSD)방식과 같게
+설정했다.
+```java
+class GameView extends Frame {
+    private void addCommand() {
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent ke) {
+                if (ke.getKeyChar() == 'w') {
+                    board.moveToUp();
+                }
+
+                if (ke.getKeyChar() == 's') {
+                    board.moveToUnder();
+                }
+
+                if (ke.getKeyChar() == 'a') {
+                    board.moveToLeft();
+                }
+
+                if (ke.getKeyChar() == 'd') {
+                    board.moveToRight();
+                }
+
+                checkWinner();
+                checkFinish();
+
+                removeAll();
+                setLabels();
+            }
+        });
+    }
+}
+```
+ 이 코드는 상당히 길어보이지만 막상 말하면 별거 없다. 한마디로 키보드에 대한 입력값을 처리하는 부분이다.
+입력에 대한 명령어를 처리하기 위해서 KeyAdapter를 사용했다. keyType 메서드는 키보드가 눌렀다 뗏을 때
+처리하는 메서드이다. 그래서 움직임에 따라서 조건문을 처리해서 해당 값에 대한 명을 처리하도록 구현했다.   
+ 그리고 아래 보이는 코드의 경우 Label들을 갱신해야 하기 때문에 모든 값들을 다시 지우고 다시 추가하는
+ 방식으로 구현했다.   
