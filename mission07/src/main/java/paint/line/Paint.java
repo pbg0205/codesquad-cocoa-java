@@ -50,8 +50,13 @@ class Paint extends Frame implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent me) {
+        if(me.getModifiersEx() != MouseEvent.BUTTON1_DOWN_MASK){
+            return ;
+        }
+
         x = me.getX();
         y = me.getY();
+
         gImage.drawString("*", x, y);
         repaint();
     }
