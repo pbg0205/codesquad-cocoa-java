@@ -429,7 +429,7 @@ class Test1{
 (1) 구현영상  
 (2) 그림판 선그리기
 <br><br>
-> ###(1) 구현영상   
+> ### (1) 구현영상   
 ![캡처](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/docs/images/2048.PNG)
  [코드는 여기!](https://github.com/pbg0205/codesquad-cocoa-java/tree/master/mission07/src/main/java/game2048)   
   전에 한번 스터디를 하면서 Java GUI를 처음 접해보게 되었는데 이렇게 다시 접하게 될 줄 몰랐다. 그 때도 미숙한 코드를 가지고 
