@@ -421,8 +421,8 @@ class Test1{
 - 왜냐하면 adapter의 메서드들은 비어있는 메서드이기 때문이다.
 
 > ## (2) 자바 메모장 만들기
-
-> 해당 내용을 소스 코드로 대체합니다. → [[소스코드]](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/notepad/NoteView.java)
+![자바메모장](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/docs/images/notepad.PNG)   
+해당 내용을 소스 코드로 대체합니다. → [[소스코드]](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/notepad/NoteView.java)
 
 # Day18.미션 8 2048 UI 구현하기 + 그림판 선그리기
 ## 목록(Contents)
