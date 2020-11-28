@@ -575,7 +575,7 @@ class GameView extends Frame {
  그리고 아래 보이는 코드의 경우 Label들을 갱신해야 하기 때문에 모든 값들을 다시 지우고 다시 추가하는
  방식으로 구현했다.   
  
- # Day19. 수업 정리
+ # Day19. 수업 정리(자바 swing)
   ## 목록(Contents)
  - (1) awt/swing을 이용한 고양이 다마고치
  - (2) 쓰레드 Timer
@@ -724,7 +724,7 @@ public class MainWindow extends JFrame implements Runnable {
  
  # Day20. 알고리즘 데이!
  ## 목록(Contents)
- ###leet code
+ ### leet code
  - (1) two-sum ([문제](https://leetcode.com/problems/two-sum/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/Two_Sum.java))
  - (2) reverse-integer ([문제](https://leetcode.com/problems/reverse-integer/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/ReverseInteger.java))
  - (3) palindrome-number ([문제](https://leetcode.com/problems/palindrome-number/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/Palindrome.java))
