@@ -574,3 +574,160 @@ class GameView extends Frame {
 처리하는 메서드이다. 그래서 움직임에 따라서 조건문을 처리해서 해당 값에 대한 명을 처리하도록 구현했다.   
  그리고 아래 보이는 코드의 경우 Label들을 갱신해야 하기 때문에 모든 값들을 다시 지우고 다시 추가하는
  방식으로 구현했다.   
+ 
+ # Day19. 수업 정리
+  ## 목록(Contents)
+ - (1) awt/swing을 이용한 고양이 다마고치
+ - (2) 쓰레드 Timer
+ 
+ > ### awt/swing을 이용한 고양이 애니메이션
+이번 강의는 swing을 이용한 고양이 애니메이션 구현 라이브 코딩이었다. 기존의 수업의 경우 CS의 전반적인 지식과 키워드를 중접적으로 
+ 설명하셨지만 이번 시간은 직접 코드를 작성하시는 점에서 기대가 되었다. 이전에 코코아 과정을 신청하면서 나보다 잘하는 분은 코드를
+ 작성하는지에 대한 궁금증이 있었다. 그래서 기존의 다른 수업들 보다 나에게는 더욱 크게 다가왔다.
+  swing은 java GUI 프로그램이다. awt의 경우 OS의 컴포넌트를 사용하기 때문에 상대적으로 플랫폼에 의존적인 것에 반해 swing의 
+  경우 자체 컴포넌트를 사용하기 때문에 플랫폼 독립적이라고 본다고 한다. 이전에 책의 예제를 통해 간단히 접한 단계라 아직 부족한 
+  부분이었는데 이번 기회에 이전의 나보다는 GUI에 한 발자국 성장한 모습이길 기대하면서 복습 겸 회고를 작성한다.
+  
+```java
+    public class MainWindow extends JFrame implements Runnable{
+        private BufferedImage background;
+        private Neko neko;
+        private Thread thread;
+        private long frame  = 0; /* 프로그램 작동 프레임을 확인하기 위한 변수? */
+        private Input input;
+
+        public MainWindow() {
+            initUI();
+            initNeko();
+            initOthers();
+        }
+    }
+```
+ 우선적으로 MainWindow의 인스턴스를 생성 시, 세가지 함수를 불러오는 것을 확인할 수 있다.
+ 1. initUI : Frame에 대한 설정과 mouseaction에 관한 내용을 담고 있다.
+ 2. initNeko() : 고양이 이미지를 load하기 위한 내용을 담고 있다.
+ 3. initOthers() : Thread 생성.(thread = new Thread(this))
+ 
+ ```java
+     public class MainWindow extends JFrame implements Runnable{
+
+        private void initUI() {
+            setTitle(TITLE);
+            addBackground();
+            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            input = new Input(this);
+            addMouseListener(input);
+            addMouseMotionListener(input);
+            setLocationRelativeTo(null);
+            setResizable(false);
+        }
+    }
+```
+- setDefaultCloseOperation(DISPOSE_ON_CLOSE): 오른쪽 상단 X표시 클릭 시, 종료되는 조건
+    - DISPOSE_ON_CLOSE : 등록되어 있는 임의의 WindowListener 오브젝트를 호출한 후, 자동적으로 프레임을 숨겨 파기
+- addMouseListener : input 값을 받아 작동하도록 setting하는 작업
+- setLocationRelativeTo(null) : 윈도우를 매개변수 안의 컴포넌트에 따라 상대적인 위치를 지정할 수 있다.
+    - argument가 null일 경우, 윈도우 중앙에 출력한다.
+    - setDefualtCloseOperation()와 세트처럼 따라다니는 메서드
+- setResizable(false) : 창크기를 조절하는 메서드
+
+```java
+    public class Neko {
+        private Map<CatStatus, List<BufferedImage>> cats = new HashMap<>(); /* 이미지를 HashMap으로 부르기 위함 */
+        private CatStatus catStatus; /* 고양이 상태를 나타내는 enum */
+        private long lastFrame; /* 이전 고양이 상태의 정보값을 담기위한 변수 */
+        private boolean noOp;    
+    }
+```
+HashMap을 통해서 고양이의 상태를 key값으로 해당 동작을 저장하는 이미지를 List형태 입력한 형태다. K,V방식은 주로 인력관리 프로그램에서
+사람들을 빠르게 확인할 수 있는 용도로 많이 봐왔다. 이미지 작업을 HashMap형태로 표현할 수 있다는 것이 신기하다.
+
+```java
+public enum CatStatus {
+    STAND,
+    SLEEP,
+    SLEEPING,
+    TOP,
+    TOP_LEFT,
+    TOP_RIGHT,
+    LEFT,
+    RIGHT,
+    BOTTOM,
+    BOTTOM_LEFT,
+    BOTTOM_RIGHT,
+    WAKE_UP
+}
+```
+ 그리고 Honux는 CatStatus를 enum형태로 정의했다. enum은 주로 정해진 명령에 대한 처리를 하기 위해서 주로 사용했었다. 
+ enum은 '서로 관련된 상수를 편리하게 선언하기 위한 방법'이라고 한다.
+```java
+public class MainWindow extends JFrame implements Runnable{
+    @Override
+    public void paint(Graphics g) {
+        g.drawImage(background, 0, 0, this); /* 배경화면 그리기 */
+        int x = getWidth() / 2; /* 프로그램 가로 중앙에 위치 */
+        int y = getHeight() / 2; /* 프로그램의 세로 중앙에 위치 */
+        int w = Neko.W;
+        int h = Neko.H;
+
+        g.drawImage(neko.getImage(frame), x, y, x + w * 2, y + h * 2, 0, 0, w, h, this);
+         /* 고양이의 첫 위치를 중앙에 위치해서 생성하도록 paint하기 */
+    }
+}
+```
+ 지난주 나의 최대의 난제는 Listenrer와 paint였다. 대체 저것은 어떻게 작동하는 것이지? 하는 의문이었다. 어딜 찾아봐도
+ Graphics g를 argument로 사용하는 코드는 없었다. 어딜봐도 없었다. 그런데 이 인자는 코드 내부에서 받아서 사용하는 함수가
+ 아니라 매개인자를 전달해 주는 주체가 JVM 혹은 OS 였다. 그러니 어디서도 확인할 수 없었다.
+  paint 함수와 같이 JVM과 OS에게 값을 전달받아 사용하는 함수가 callback함수이다. callback 함수는 비동기처리와도 연관이 많다고
+  하는데 한번 추후에 공부해봐야 겠다.
+ - paint : 그래픽 이벤트가 발생했을 때 호출하는 메서드
+ - repaint : 강제로 한번 더 호출하고자 할 때 사용하는 메서드.
+    - 자바 그래픽 메서드
+        - [참고 reference](https://darkhorizon.tistory.com/37)
+        - [paint 기초내용 블로그](https://javacrush.tistory.com/entry/java-%ED%8E%98%EC%9D%B8%ED%8A%B8-%EA%B8%B0%EC%B4%88)
+    <br><br>
+```
+public class MainWindow extends JFrame implements Runnable{
+        public static void main(String[] args) {
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.setVisible(true);
+            mainWindow.start();
+    
+        }
+}
+```
+main method를 통해 mainWindow 인스턴스가 생성되면서 앞서 이야기 한 값들 이 모두 초기화 된다.
+그리고 mainWindow는 내부의 멤버변수로 thread 선언 및 사용하도록 작성했기 start를 사용해서 Thread를 작동시킨다.
+
+```java
+public class MainWindow extends JFrame implements Runnable {
+    @Override
+    public void run() {
+        while (true) {
+            frame++;
+            try {
+                Thread.sleep(GAP);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            update();
+            repaint();
+            System.out.println(frame);
+        }
+    }
+}
+```
+ start method를 호출하면 thread를 생성하고 내부 run 메서드를 호출해서 thread를 작동시킨다.
+ 내부 로직을 확인해보면 GAP이라는 시간만큼 정지 후 작동해서 고양이의 위치를 변경(update)하고
+  repaint를 호출해 변경된 위치에 고양의 이미지 다시 그린다.
+ <br> <br>
+ 
+ # Day20. 알고리즘 데이!
+ ## 목록(Contents)
+ ###leet code
+ - (1) two-sum ([문제](https://leetcode.com/problems/two-sum/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/Two_Sum.java))
+ - (2) reverse-integer ([문제](https://leetcode.com/problems/reverse-integer/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/ReverseInteger.java))
+ - (3) palindrome-number ([문제](https://leetcode.com/problems/palindrome-number/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/Palindrome.java))
+ - (4) roman-to-integer ([문제](https://leetcode.com/problems/roman-to-integer/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/RomanNumberals.java))
+ - (5) longest-common-prefix ([문제](https://leetcode.com/problems/longest-common-prefix/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/longest_common_prefix.java))
+ - (6) merge-two-sorted-lists ([문제](https://leetcode.com/problems/merge-two-sorted-lists/) / [풀이](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/mission07/src/main/java/algorithm/two_sorted_lists.java))
