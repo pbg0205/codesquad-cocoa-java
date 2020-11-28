@@ -3,6 +3,7 @@ package game2048;
 import java.util.Objects;
 
 public class Number {
+    private static final Number ZERO_INSTANCE = new Number(0);
     private static final int MAX_NUMBER = 2048;
     private int number;
 
@@ -10,8 +11,8 @@ public class Number {
         this.number = number;
     }
 
-    public static Number zero(){
-        return new Number(0);
+    public static Number getZeroInstance(){
+        return ZERO_INSTANCE;
     }
 
     public boolean is2048() {
