@@ -25,7 +25,7 @@ class Board {
 
     private void initColumn(int row) {
         for (int col = 0; col < RANGE_MAX; col++) {
-            this.numberArray[row][col] = Number.zero();
+            this.numberArray[row][col] = Number.getZeroInstance();
         }
     }
 
@@ -38,7 +38,7 @@ class Board {
             row = RandomCreator.create();
             col = RandomCreator.create();
 
-            if (this.numberArray[row][col].equals(Number.zero())) {
+            if (this.numberArray[row][col].equals(Number.getZeroInstance())) {
                 this.numberArray[row][col] = new Number(number);
                 initNumber = true;
             }
@@ -64,7 +64,7 @@ class Board {
         for (int row = 0; row < RANGE_MAX; row++) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(Number.zero())) {
+            if (thisNumber.equals(Number.getZeroInstance())) {
                 continue;
             }
             queue.add(thisNumber);
@@ -84,7 +84,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row++][col] = Number.zero();
+            this.numberArray[row++][col] = Number.getZeroInstance();
         }
     }
 
@@ -103,7 +103,7 @@ class Board {
         for (int row = RANGE_MAX - 1; row >= 0; row--) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(Number.zero())) {
+            if (thisNumber.equals(Number.getZeroInstance())) {
                 continue;
             }
 
@@ -123,7 +123,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row--][col] = Number.zero();
+            this.numberArray[row--][col] = Number.getZeroInstance();
         }
     }
 
@@ -142,7 +142,7 @@ class Board {
         for (int col = 0; col < RANGE_MAX; col++) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(Number.zero())) {
+            if (thisNumber.equals(Number.getZeroInstance())) {
                 continue;
             }
 
@@ -162,7 +162,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row][col++] = Number.zero();
+            this.numberArray[row][col++] = Number.getZeroInstance();
         }
     }
 
@@ -178,7 +178,7 @@ class Board {
         for (int col = RANGE_MAX - 1; col >= 0; col--) {
             Number thisNumber = this.numberArray[row][col];
 
-            if (thisNumber.equals(Number.zero())) {
+            if (thisNumber.equals(Number.getZeroInstance())) {
                 continue;
             }
 
@@ -198,7 +198,7 @@ class Board {
                 continue;
             }
 
-            this.numberArray[row][col--] = Number.zero();
+            this.numberArray[row][col--] = Number.getZeroInstance();
         }
     }
 
@@ -285,7 +285,7 @@ class Board {
     }
 
     private boolean checkZero(int row, int col) {
-        return this.numberArray[row][col].equals(Number.zero());
+        return this.numberArray[row][col].equals(Number.getZeroInstance());
     }
 
     /*
