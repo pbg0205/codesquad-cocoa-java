@@ -114,6 +114,7 @@ public class GameView extends Frame {
             String message = "you lose";
             System.out.println(message);
             sendExitMessage(message);
+            return;
         }
         board.generateNumber(2);
         board.printMapStatus();
@@ -127,15 +128,15 @@ public class GameView extends Frame {
         label.setAlignment(Label.CENTER);
         dialog.add("Center", label);
         dialog.setSize(300,200);
-        dialog.add("South", button);
-
-        button.addActionListener(e -> System.exit(0));
         dialog.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 System.exit(0);
             }
         });
+
+        dialog.add("South", button);
+        button.addActionListener(e -> System.exit(0));
 
         dialog.setLocation(getWidth() / 2, getHeight() / 2);
         dialog.setVisible(true);
