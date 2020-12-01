@@ -33,6 +33,22 @@ public class MemberDao {
         return false;
     }
 
+    public boolean hasSameId(Member member) {
+        Member memberInCsv;
+        String line = "";
+
+        connectReaderFromCsv();
+
+        while ((line = readLine()) != null) {
+            memberInCsv = parseMember(line);
+
+            if (memberInCsv.sameIdWith(member.getId())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public Member getMemberData(Member member) {
         Member memberInCsv;
         String line = "";
@@ -47,7 +63,6 @@ public class MemberDao {
                 return memberInCsv;
             }
         }
-
         return null;
     }
 
@@ -72,6 +87,7 @@ public class MemberDao {
         connectWriterFromCsv();
         stringBuilder = getMemberInfo(member);
         addMemberToCsv(stringBuilder);
+
         recordDao.makeMemberCsvFile();
 
         try {
@@ -93,7 +109,7 @@ public class MemberDao {
 
     private void addMemberToCsv(StringBuilder memberInfo) {
         try {
-            this.bufferedWriter.write(String.valueOf(memberInfo));
+            this.bufferedWriter.write(memberInfo + "\n");
         } catch (IOException e) {
             e.printStackTrace();
         }

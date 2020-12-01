@@ -127,7 +127,7 @@ public class LoginPage {
                     System.out.println("결과 있음:" + id + " " + password);
                     member = memberDao.getMemberData(member);
                     System.out.println(member.getCsvRecords());
-                    //loginFrame.setVisible(false);
+//                    loginFrame.setVisible(false);
                 }else {
                     JOptionPane.showMessageDialog(loginFrame, "로그인에 실패하였습니다.");
                 }
@@ -138,6 +138,7 @@ public class LoginPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //회원가입 창으로 이동
+                new SignUpPage();
             }
         }
     }

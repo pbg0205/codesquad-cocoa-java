@@ -45,6 +45,14 @@ public class Member {
         return this.equals(member);
     }
 
+    public boolean sameIdWith(String id) {
+        return this.getId().equals(id);
+    }
+
+    public boolean isPasswordType() {
+        return REGULAR_EXPRESSION_OF_PASSWORD.matcher(this.password).find();
+    }
+
     public StringBuilder getCsvRecords() {
         return this.recordList.getCsvRecords();
     }

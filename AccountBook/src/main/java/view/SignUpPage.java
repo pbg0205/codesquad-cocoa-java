@@ -1,6 +1,7 @@
 package view;
 
 import dao.MemberDao;
+import domain.Member;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -51,8 +52,13 @@ public class SignUpPage {
         private JButton cancelButton;
 
         public SignUpPanel() {
+            initMemberDao();
             setupPanel();
             addComponent();
+        }
+
+        private void initMemberDao() {
+            memberDao = new MemberDao();
         }
 
         private void setupPanel() {
@@ -171,46 +177,51 @@ public class SignUpPage {
 
         class OkListener implements ActionListener {
 
-            //TODO okListencer 처리하기
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (isValidForm()) {
-                    JOptionPane.showMessageDialog(signUpFrame, "회원가입이 완료되셨습니다.");
-                    memberDao.addMember(idTextField.getText(), passwordField.getPassword());
-                    //TODO 회원 추가 로직 입력하기
-                }
-            }
+                Member member = makeDto();
+                System.out.println("여기까지");
 
-            private boolean isValidForm() {
-                if (hasDuplcatedId()) {
-                    return false;
+                if (hasDuplcatedId(member)) {
+                    JOptionPane.showMessageDialog(signUpFrame, "중복된 아이디가 존재합니다.");
+                    return;
                 }
                 if (!areSamePassword()) {
-                    return false;
+                    JOptionPane.showMessageDialog(signUpFrame, "비밀번호가 일치하지 않습니다.");
+                    return;
                 }
-                //TODO 특수문자 포함되어 있는지 확인
-                return true;
+                if (!member.isPasswordType()) {
+                    JOptionPane.showMessageDialog(signUpFrame, "특수문자가 포함되어 있지 않습니다.");
+                    return;
+                }
+                JOptionPane.showMessageDialog(signUpFrame, "회원가입이 완료되셨습니다.");
+                addMemberInMemberDao(member);
+
+                signUpFrame.setVisible(false);
+                signUpFrame = null;
             }
 
-            private boolean hasDuplcatedId() {
-                String id = idTextField.getText();
+            private Member makeDto() {
+                String id = String.valueOf(idTextField.getText());
+                String pw = String.valueOf(passwordField.getPassword());
+                int balance = Integer.parseInt(balanceField.getText());
 
-                if (memberDao.hasSameId(id)) {
-                    JOptionPane.showMessageDialog(signUpFrame, "중복된 아이디가 존재합니다.");
-                    return false;
-                }
-                return true;
+                return new Member(id, pw, balance);
+            }
+
+            private void addMemberInMemberDao(Member member) {
+                memberDao.addMember(member);
+            }
+
+            private boolean hasDuplcatedId(Member member) {
+                return memberDao.hasSameId(member);
             }
 
             private boolean areSamePassword() {
                 String password = String.valueOf(passwordField.getPassword());
                 String password2 = String.valueOf(passwordField2.getPassword());
 
-                if (!password.equals(password2)) {
-                    JOptionPane.showMessageDialog(signUpFrame, "비밀번호가 일치하지 않습니다.");
-                    return false;
-                }
-                return true;
+                return password.equals(password2);
             }
         }
 

@@ -14,8 +14,6 @@ public class RecordDao {
     private FileReader fileReader;
 
     private File file;
-    private FileWriter fileWriter;
-    private BufferedWriter bufferedWriter;
 
     public RecordDao(String memberId) {
         this.memberRecordsPath = RECORDS_DIRECTORY_PATH + memberId + this.csv;
@@ -52,6 +50,8 @@ public class RecordDao {
             record = parseMemberRecord(line);
             recordList.insertRecord(record);
         }
+
+        closeReaders();
         return recordList;
     }
 
@@ -65,8 +65,18 @@ public class RecordDao {
         return null;
     }
 
+    private void closeReaders() {
+        try {
+            fileReader.close();
+            bufferedReader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /*
-     * Create Member To Css File
+     * Writer Connection
      */
     public void makeMemberCsvFile() {
         this.file = new File(memberRecordsPath);
