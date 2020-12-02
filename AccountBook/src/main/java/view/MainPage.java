@@ -1,6 +1,8 @@
 package view;
 
+import dao.RecordDao;
 import domain.Member;
+import domain.Record;
 
 import javax.swing.*;
 import java.awt.*;
@@ -92,6 +94,8 @@ public class MainPage {
             assetButton.setBackground(Color.white);
             assetButton.setBounds(x, y, rowSize, colSize);
             assetButton.addActionListener(e -> {
+                System.out.println("작동 확인");
+
 //                assetPanel.setVisible(true);
 //                graphPanel.setVisible(false);
             });
@@ -126,6 +130,7 @@ public class MainPage {
                 mainFrame.setVisible(false);
                 mainFrame = null;
                 JOptionPane.showMessageDialog(mainFrame, "로그아웃 되었습니다.");
+                new RecordDao(loginedMember.getId()).saveRecords(loginedMember);
                 new LoginPage();
             });
             add(logoutButton);
@@ -202,12 +207,7 @@ public class MainPage {
             addButton.setBorderPainted(false);
             addButton.setBackground(Color.white);
             addButton.setBounds(x, y, width, height);
-            addButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                }
-            });
+            addButton.addActionListener(e -> new InsertPage());
             add(addButton);
         }
 
@@ -266,6 +266,7 @@ public class MainPage {
 
             assetTable = new JTable(rowDate, columnNames);
             assetTable.setBounds(50, 100, 330, 400);
+            assetTable.getColumn("No").setPreferredWidth(30);
             assetTable.getColumn("날짜").setPreferredWidth(110);
             assetTable.setRowHeight(20);
 
@@ -278,11 +279,208 @@ public class MainPage {
         }
 
         private String[] getColumnsNames() {
-            return new String[] {"날짜","세부 사항", "금액", "카테고리", "지불방식"};
+            return new String[] {"No","날짜","세부 사항", "금액", "카테고리", "지불방식"};
         }
 
         private String[][] getRecordsAsStringArr() {
             return loginedMember.getRecordsAsArrayForm();
+        }
+    }
+
+    public class InsertPage {
+        private String title = "추가";
+
+        private JFrame insertFrame;
+        private InsertPanel insertPanel;
+
+        public InsertPage() {
+            initComponent();
+            setupFrame();
+        }
+
+        private void initComponent() {
+            insertFrame = new JFrame();
+            insertPanel = new InsertPage.InsertPanel();
+        }
+
+        private void setupFrame() {
+            insertFrame.setTitle(title);
+            insertFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            insertFrame.add(insertPanel);
+            insertFrame.setSize(insertPanel.getSize());
+            insertFrame.setLocationRelativeTo(null);
+            insertFrame.setResizable(false);
+            insertFrame.setVisible(true);
+        }
+
+        class InsertPanel extends JPanel{
+
+            private JLabel dateLabel;
+            private JLabel detailLabel;
+            private JLabel moneyLabel;
+            private JLabel categoryLabel;
+            private JLabel payTypeLabel;
+
+            private JTextField dateTextField;
+            private JTextField detailTextField;
+            private JTextField moneyTextField;
+            private JComboBox<String> categoryComboBox;
+            private JComboBox<String>  payTypeComboBox;
+
+            private JButton okButton;
+            private JButton cancelButton;
+
+            InsertPanel( ) {
+                setupInsertPanel();
+                addComponents();
+            }
+
+            private void setupInsertPanel() {
+                setSize(270, 320);
+                setLayout(null);
+            }
+
+            private void addComponents() {
+                addInsertLabels();
+                addInsertTextFields();
+                addButtons();
+            }
+
+            private void addInsertLabels() {
+                int initX = 30;
+                int initY = 30;
+                int gapOfY = 40;
+                int width = 80;
+                int height = 25;
+
+                addDateLabel("날짜", initX, initY, width, height);
+                addDetailLabel("세부사항", initX, initY + gapOfY, width, height);
+                addMoneyLabel("금액", initX, initY + gapOfY * 2, width, height);
+                addCategoryLabel("카테고리", initX, initY + gapOfY * 3, width, height);
+                addPayTypeLabel("지불방식", initX, initY + gapOfY * 4, width, height);
+            }
+
+            private void addDateLabel(String name, int x, int y, int width, int height) {
+                dateLabel = new JLabel(name);
+                dateLabel.setBounds(x, y, width, height);
+                add(dateLabel);
+            }
+
+            private void addDetailLabel(String name, int x, int y, int width, int height) {
+                detailLabel = new JLabel(name);
+                detailLabel.setBounds(x, y, width, height);
+                add(detailLabel);
+            }
+
+            private void addMoneyLabel(String name, int x, int y, int width, int height) {
+                moneyLabel = new JLabel(name);
+                moneyLabel.setBounds(x, y, width, height);
+                add(moneyLabel);
+            }
+
+            private void addCategoryLabel(String name, int x, int y, int width, int height) {
+                categoryLabel = new JLabel(name);
+                categoryLabel.setBounds(x, y, width, height);
+                add(categoryLabel);
+            }
+
+            private void addPayTypeLabel(String name, int x, int y, int width, int height) {
+                payTypeLabel = new JLabel(name);
+                payTypeLabel.setBounds(x, y, width, height);
+                add(payTypeLabel);
+            }
+
+            private void addInsertTextFields() {
+                int initX = 100;
+                int initY = 30;
+                int gapOfY = 40;
+                int width = 120;
+                int height = 25;
+
+                addIdDateField(initX, initY, width, height);
+                addDetailField(initX, initY + gapOfY, width, height);
+                addMoneyField(initX, initY + gapOfY * 2, width, height);
+                addCategoryComboBox(initX, initY + gapOfY * 3, width, height);
+                addPayTypeComboBox(initX, initY + gapOfY * 4, width, height);
+            }
+
+            private void addIdDateField(int x, int y, int width, int height) {
+                dateTextField = new JTextField(20);
+                dateTextField.setBounds(x, y, width, height);
+                add(dateTextField);
+            }
+
+            private void addDetailField(int x, int y, int width, int height) {
+                detailTextField = new JTextField(20);
+                detailTextField.setBounds(x, y, width, height);
+                add(detailTextField);
+            }
+
+            private void addMoneyField(int x, int y, int width, int height) {
+                moneyTextField = new JTextField(20);
+                moneyTextField.setBounds(x, y, width, height);
+                add(moneyTextField);
+            }
+
+            private void addCategoryComboBox(int x, int y, int width, int height) {
+                String[] categories = {"TRANSFORTATION", "FOOD", "CURTURE", "HEALTH", "BEAUTY", "ETC"};
+                categoryComboBox = new JComboBox<>(categories);
+                categoryComboBox.setBounds(x, y, width, height);
+                add(categoryComboBox);
+            }
+
+            private void addPayTypeComboBox(int x, int y, int width, int height) {
+                String[] payTypes = {"CARD, CASH"};
+                payTypeComboBox = new JComboBox<>(payTypes);
+                payTypeComboBox.setBounds(x, y, width, height);
+                add(payTypeComboBox);
+            }
+
+            /*
+             * buttons
+             */
+            private void addButtons() {
+                int initX = 30;
+                int initY = 230;
+                int gapOfX = 110;
+                int width = 80;
+                int height = 25;
+
+                addOkButton("OK", initX, initY, width, height);
+                addCancelButton("CANCEL", initX + gapOfX, initY, width, height);
+            }
+
+            private void addOkButton(String name, int x, int y, int width, int height) {
+                okButton = new JButton(name);
+                okButton.setBounds(x, y, width, height);
+                okButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Record record = getRecordFromTextField();
+                        loginedMember.insertRecord(record);
+                        System.out.println(loginedMember.getCsvRecords());
+                        insertFrame.setVisible(false);
+                    }
+
+                    private Record getRecordFromTextField() {
+                        String date = dateTextField.getText();
+                        String detail = detailTextField.getText();
+                        int money = Integer.parseInt(moneyTextField.getText());
+                        String category = (String)categoryComboBox.getSelectedItem();
+                        String payType = (String)payTypeComboBox.getSelectedItem();
+
+                        return new Record(date, detail, money, category, payType);
+                    }
+                });
+                add(okButton);
+            }
+
+            private void addCancelButton(String name, int x, int y, int width, int height) {
+                cancelButton = new JButton(name);
+                cancelButton.setBounds(x, y, width, height);
+                cancelButton.addActionListener(e -> insertFrame.setVisible(false));
+                add(cancelButton);
+            }
         }
     }
 

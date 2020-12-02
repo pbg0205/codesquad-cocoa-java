@@ -50,7 +50,7 @@ public class RecordList {
      */
     String[][] makeRecordsAsArrayForm() {
         int rowSize = getRecordsSize();
-        int colSize = 5;
+        int colSize = 6;
 
         String[][] recordsArr = new String[rowSize][colSize];
 
@@ -70,6 +70,18 @@ public class RecordList {
     }
 
     private String[] insertEachRecord(int row) {
-        return recordList.get(row).getStringArrayForm();
+        int colSize = 6;
+        String[] strArr_tmp = recordList.get(row).getStringArrayForm();
+        String[] eachRecord = new String[colSize];
+
+        for (int index = 0; index < colSize; index++) {
+            if(index == 0){
+                eachRecord[0] = String.valueOf(row);
+                continue;
+            }
+            eachRecord[index] = strArr_tmp[index - 1];
+        }
+
+        return eachRecord;
     }
 }

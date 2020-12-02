@@ -41,7 +41,7 @@ public class Record {
     }
 
     String getCsvRecord (){
-        return String.format("%s,%s,%d,%s,%s\n",this.useDate, this.detail, this.money, this.payType, this.category);
+        return String.format("%s,%s,%d,%s,%s\n",this.useDate, this.detail, this.money, this.category, this.payType);
     }
 
     String[] getStringArrayForm() {
@@ -54,6 +54,6 @@ public class Record {
 
     @Override
     public String toString() {
-        return String.format("%25s %20s %20d %20s", this.useDate, this.detail, this.money, this.payType, this.category);
+        return String.format("%25s %20s %20d %20s", this.useDate, this.detail, this.money, this.category, this.payType);
     }
 }

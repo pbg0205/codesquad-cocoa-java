@@ -61,6 +61,15 @@ public class Member {
         return this.recordList.makeRecordsAsArrayForm();
     }
 
+    public void insertRecord(Record record) {
+        recordList.insertRecord(record);
+        this.balance = calculateBalance();
+    }
+
+    public int calculateBalance(){
+        return recordList.calculateBalance(this.balance);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

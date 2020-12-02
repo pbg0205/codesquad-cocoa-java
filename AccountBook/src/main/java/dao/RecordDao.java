@@ -1,5 +1,6 @@
 package dao;
 
+import domain.Member;
 import domain.Record;
 import domain.RecordList;
 
@@ -14,6 +15,9 @@ public class RecordDao {
     private FileReader fileReader;
 
     private File file;
+
+    private FileWriter fileWriter;
+    private BufferedWriter bufferedWriter;
 
     public RecordDao(String memberId) {
         this.memberRecordsPath = RECORDS_DIRECTORY_PATH + memberId + this.csv;
@@ -78,11 +82,45 @@ public class RecordDao {
     /*
      * Writer Connection
      */
+    private void connectWriterFromCsv() {
+        initFileWriter();
+        initBufferedWriter();
+    }
+
+    private void initFileWriter() {
+        try {
+            this.fileWriter = new FileWriter(memberRecordsPath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initBufferedWriter() {
+        this.bufferedWriter = new BufferedWriter(fileWriter);
+    }
+
+    /*
+     * records CRUD
+     */
     public void makeMemberCsvFile() {
         this.file = new File(memberRecordsPath);
 
         try {
             file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveRecords(Member member){
+        StringBuilder stringBuilder;
+
+        connectWriterFromCsv();
+        stringBuilder = member.getCsvRecords();
+
+        try {
+            this.bufferedWriter.write(String.valueOf(stringBuilder));
+            bufferedWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
