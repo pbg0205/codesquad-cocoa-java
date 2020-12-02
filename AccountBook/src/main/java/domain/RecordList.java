@@ -69,6 +69,9 @@ public class RecordList {
         return recordsArr;
     }
 
+    /*
+     * RecordList CRUD
+     */
     private String[] insertEachRecord(int row) {
         int colSize = 6;
         String[] strArr_tmp = recordList.get(row).getStringArrayForm();
@@ -83,5 +86,20 @@ public class RecordList {
         }
 
         return eachRecord;
+    }
+
+    public void modifyRecord(int index, Record record) {
+        if(index >= recordList.size() || index < 0){
+            return ;
+        }
+
+        this.recordList.remove(index);
+        this.recordList.add(record);
+        sortByUseDate();
+    }
+
+    public void deleteRecord(int index) {
+        this.recordList.remove(index);
+        sortByUseDate();
     }
 }

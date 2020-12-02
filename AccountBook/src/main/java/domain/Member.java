@@ -61,13 +61,26 @@ public class Member {
         return this.recordList.makeRecordsAsArrayForm();
     }
 
+    public int calculateBalance(){
+        return recordList.calculateBalance(this.balance);
+    }
+
+    /*
+     * Member`s Record CRUD
+     */
     public void insertRecord(Record record) {
         recordList.insertRecord(record);
         this.balance = calculateBalance();
     }
 
-    public int calculateBalance(){
-        return recordList.calculateBalance(this.balance);
+    public void modifyRecord(int index, Record record) {
+        recordList.modifyRecord(index, record);
+        this.balance = calculateBalance();
+    }
+
+    public void deleteRecord(int index) {
+        recordList.deleteRecord(index);
+        this.balance = calculateBalance();
     }
 
     @Override
