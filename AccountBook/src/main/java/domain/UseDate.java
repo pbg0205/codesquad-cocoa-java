@@ -6,9 +6,9 @@ import java.util.Objects;
 class UseDate implements Comparable<UseDate>{
     private static final String REGEULAR_REGEX_SPECIAL_CHARACTER = "[ ,.-]";
     private static final Comparator<UseDate> USE_DATE_COMPARATOR =
-            Comparator.comparingInt((UseDate ud) -> ud.year)
-            .thenComparing(ud -> ud.month)
-            .thenComparing(ud -> ud.date);
+            Comparator.comparingInt((UseDate ud) -> -ud.year)
+            .thenComparing(ud -> -ud.month)
+            .thenComparing(ud -> -ud.date);
 
     private int year;
     private int month;

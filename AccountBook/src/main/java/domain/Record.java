@@ -32,16 +32,24 @@ public class Record {
     /*
      * getter
      */
-    public UseDate getUseDate() {
+    UseDate getUseDate() {
         return useDate;
     }
 
-    public int getMoney() {
+    int getMoney() {
         return money;
     }
 
-    public String getCsvRecord (){
+    String getCsvRecord (){
         return String.format("%s,%s,%d,%s,%s\n",this.useDate, this.detail, this.money, this.payType, this.category);
+    }
+
+    String[] getStringArrayForm() {
+        return new String[] {useDate.toString(),
+                detail,
+                String.valueOf(money),
+                category.getValue(),
+                payType.getValue()};
     }
 
     @Override

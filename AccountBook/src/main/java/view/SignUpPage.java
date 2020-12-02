@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SignUpPage {
-    private String TITLE = "로그인 페이지";
+    private String title = "로그인 페이지";
 
     private JFrame signUpFrame;
     private SignUpPanel signUpPanel;
@@ -24,7 +24,7 @@ public class SignUpPage {
     }
 
     private void setupFrame() {
-        signUpFrame.setTitle(TITLE);
+        signUpFrame.setTitle(title);
         signUpFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         signUpFrame.add(signUpPanel);
         signUpFrame.setSize(signUpPanel.getSize());

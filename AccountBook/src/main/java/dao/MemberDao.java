@@ -109,7 +109,7 @@ public class MemberDao {
 
     private void addMemberToCsv(StringBuilder memberInfo) {
         try {
-            this.bufferedWriter.write(memberInfo + "\n");
+            this.bufferedWriter.write(String.valueOf(memberInfo));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -171,9 +171,17 @@ public class MemberDao {
     private Member parseMember(String line) {
         String[] data = line.split(",");
 
+        if(data.length == 0){
+            return null;
+        }
+
         String id = data[0].trim();
         String pw = data[1].trim();
 
+        if (data.length >= 3) {
+            int balance = Integer.parseInt(data[2].trim());
+            return new Member(id, pw, balance);
+        }
         return new Member(id, pw);
     }
 }

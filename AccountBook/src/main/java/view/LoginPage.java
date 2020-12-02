@@ -81,7 +81,6 @@ public class LoginPage {
         }
 
         private void addLoginComponents(int x, int y) {
-
             idLabel = new JLabel("ID");
             idLabel.setBounds(x + 20, y, 80, 25);
             add(idLabel);
@@ -120,14 +119,15 @@ public class LoginPage {
                 String id = idTextField.getText();
                 String password = String.valueOf(passwordField.getPassword());
                 Member member = new Member(id, password);
-                System.out.println(id + " " + password);
 
                 if(memberDao.hasMember(member)) {
                     JOptionPane.showMessageDialog(loginFrame, "로그인에 성공하였습니다.");
-                    System.out.println("결과 있음:" + id + " " + password);
+
                     member = memberDao.getMemberData(member);
+
+                    loginFrame.setVisible(false);
+                    new MainPage(member);
                     System.out.println(member.getCsvRecords());
-//                    loginFrame.setVisible(false);
                 }else {
                     JOptionPane.showMessageDialog(loginFrame, "로그인에 실패하였습니다.");
                 }
@@ -137,7 +137,6 @@ public class LoginPage {
         class signListener implements ActionListener {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //회원가입 창으로 이동
                 new SignUpPage();
             }
         }

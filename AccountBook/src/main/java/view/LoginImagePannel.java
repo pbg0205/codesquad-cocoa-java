@@ -10,7 +10,7 @@ import java.io.IOException;
 public class LoginImagePannel extends JPanel{
     private BufferedImage loginImage;
 
-    public LoginImagePannel() {
+    LoginImagePannel() {
         setupLoginImage();
         setupLoginImagePannel();
     }
@@ -22,7 +22,7 @@ public class LoginImagePannel extends JPanel{
 
     private void setupLoginImage() {
         try {
-            loginImage = ImageIO.read(new File("D:\\codes\\codesquad_cocoa_java\\AccountBook\\src\\main\\resources\\loginImage.jpeg"));
+            loginImage = ImageIO.read(new File(".\\AccountBook\\src\\main\\resources\\loginImage.jpeg"));
         } catch(IOException e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(new JFrame(), "loginImage Error: " + e.getMessage(),

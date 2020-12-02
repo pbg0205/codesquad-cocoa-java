@@ -57,6 +57,10 @@ public class Member {
         return this.recordList.getCsvRecords();
     }
 
+    public String[][] getRecordsAsArrayForm() {
+        return this.recordList.makeRecordsAsArrayForm();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

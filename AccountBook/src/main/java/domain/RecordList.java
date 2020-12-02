@@ -11,7 +11,6 @@ public class RecordList {
         this.recordList = new ArrayList<>();
     }
 
-
     /*
      * balance 구하기
      */
@@ -19,7 +18,7 @@ public class RecordList {
         return recordList.stream().mapToInt(Record::getMoney).sum();
     }
 
-    public int calculateBalance(int balance) {
+    int calculateBalance(int balance) {
         return balance + getSumOfRecords();
     }
 
@@ -31,7 +30,7 @@ public class RecordList {
     /*
      * Record 받아오기
      */
-    public StringBuilder getCsvRecords() {
+    StringBuilder getCsvRecords() {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Record record : recordList) {
@@ -43,5 +42,34 @@ public class RecordList {
 
     private void sortByUseDate() {
         this.recordList.sort(Comparator.comparing(Record::getUseDate));
+    }
+
+
+    /*
+     * RecordList -> String[][] 변환
+     */
+    String[][] makeRecordsAsArrayForm() {
+        int rowSize = getRecordsSize();
+        int colSize = 5;
+
+        String[][] recordsArr = new String[rowSize][colSize];
+
+        return getRecordAsArray(recordsArr);
+    }
+
+    private int getRecordsSize() {
+        return this.recordList.size();
+    }
+
+    private String[][] getRecordAsArray(String[][] recordsArr) {
+        for (int row = 0; row < recordsArr.length; row++) {
+            recordsArr[row] = insertEachRecord(row);
+        }
+
+        return recordsArr;
+    }
+
+    private String[] insertEachRecord(int row) {
+        return recordList.get(row).getStringArrayForm();
     }
 }
