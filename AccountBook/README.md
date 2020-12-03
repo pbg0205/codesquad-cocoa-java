@@ -37,22 +37,22 @@
 ![로그인 메인](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/login_page.png)   
 (2) 로그인 성공 화면   
 ![로그인 성공](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/login_success.PNG)   
-<br><br>
+<br>
 
 #### **2.회원가입**
 (1) 회원가입 화면   
 ![회원가입](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/signup_input.PNG)   
 (2) 아이디 중복 예외 화면   
 ![아이디 중복](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/duplicated_Id_message.PNG)   
-(3) 비밀번호 불일치 예외 화면
+(3) 비밀번호 불일치 예외 화면   
 ![불일치](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_same_password.PNG)    
 (4) 특수문자 미포함 비밀번호 화면    
 ![특수문자](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_special_character.PNG)   
+<br><br>
 
 #### **3.가계부 페이지**
 (1) 가계부 메인 화면   
-![가계부 메인](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_special_character.PNG)   
-<br>
+![가계부 메인](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/main_page.PNG)   
 (2) 가계부 추가 화면   
 <1.추가화면>   
 ![추가 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/add_command.PNG)   
