@@ -33,43 +33,38 @@
     
 > ### 3. 구현
 #### **1.로그인**
-(1) 로그인 메인 화면   
-![로그인 메인](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/login_page.png)   
-(2) 로그인 성공 화면   
-![로그인 성공](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/login_success.PNG)   
+(1) 로그인 메인 화면 | (2) 로그인 성공 화면
+---- | ----
+![로그인 메인](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/login_page.png) |  ![로그인 성공](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/login_success.PNG)   
 <br>
 
 #### **2.회원가입**
-(1) 회원가입 화면   
-![회원가입](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/signup_input.PNG)   
-(2) 아이디 중복 예외 화면   
-![아이디 중복](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/duplicated_Id_message.PNG)   
-(3) 비밀번호 불일치 예외 화면   
-![불일치](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_same_password.PNG)    
-(4) 특수문자 미포함 비밀번호 화면    
-![특수문자](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_special_character.PNG)   
+(1) 회원가입 화면 | (2) 아이디 중복 예외 화면 | (3) 비밀번호 불일치 예외 화면 | (4) 특수문자 미포함 비밀번호 화면
+---- | ---- | ---- | ----
+![회원가입](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/signup_input.PNG) | ![아이디 중복](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/duplicated_Id_message.PNG) | ![불일치](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_same_password.PNG) | ![특수문자](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/not_special_character.PNG)   
 <br><br>
 
 #### **3.가계부 페이지**
 (1) 가계부 메인 화면   
 ![가계부 메인](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/main_page.PNG)   
 (2) 가계부 추가 화면   
-<1.추가화면>   
-![추가 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/add_command.PNG)   
-<2.추가완료>   
-![추가 완료](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/add_confirm.PNG)   
-<br>
+
+1.추가화면 | 2.추가완료
+---- | ----
+![추가 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/add_command.PNG) | ![추가 완료](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/add_confirm.PNG)
+
 (3) 가계부 수정 화면   
-<1.수정화면>   
-![수정 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/modify_command.PNG)   
-<2.수정완료>   
-![수정 완료](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/modify_confirm.PNG)   
-<br>
+
+1.수정화면 | 2.수정완료
+---- | ---- 
+![수정 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/modify_command.PNG) | ![수정 완료](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/modify_confirm.PNG)
+
 (4) 가계부 삭제 화면   
-<1.삭제화면>   
-![삭제 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/delete_command.PNG)   
-<2. 삭제완료>   
-![삭제 완료](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/delete_page.PNG)   
+
+1.삭제화면 | 2. 삭제완료
+---- | ---- 
+![삭제 화면](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/delete_command.PNG) | ![삭제 완료](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/delete_page.PNG)   
+
 - 0번 인덱스의 '바밤바'가 삭제된 것을 확인할 수 있습니다.
 <br>
 
