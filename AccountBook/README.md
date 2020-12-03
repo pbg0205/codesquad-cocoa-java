@@ -95,5 +95,5 @@
   다행히 5주 과정을 진행하면서 그룹원들이 다들 열심히 해준 덕분에 의지가 떨어질 때마다 정신줄 부여잡고 학습할 수 있었습니다.
  5주동안 함께 열심히 학습한 그룹원들, 질문에 친절에 대답해주신 조교님들, 그리고 백엔드 마스터로 항상 멘탈을 잡아주신 호눅스 
  모두에게 감사드립니다.   
- 마지막으로 저번에 기념사진 올리고 마치겠습니다. 빠이!   
- ![title](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/codesquad.png){: width="500" height="500"}
+ **마지막으로 저번에 기념사진 올리고 마치겠습니다. 빠이!**   
+ ![title](https://github.com/pbg0205/codesquad-cocoa-java/blob/master/AccountBook/image/codesquad.png)
