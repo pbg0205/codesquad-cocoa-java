@@ -1,7 +1,8 @@
 package domain;
 
 public enum PayType {
-    CARD("현금"), CASH("카드");
+    CARD("카드"),
+    CASH("현금");
 
     private String value;
 

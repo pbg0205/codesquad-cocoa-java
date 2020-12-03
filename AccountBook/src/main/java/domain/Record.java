@@ -16,14 +16,14 @@ public class Record {
     }
 
     /*
-     * 지불 방식(payType)
+     * initilization of payType
      */
     private PayType setPayType(String payTypeStr) {
         return PayType.valueOf(payTypeStr.trim());
     }
 
     /*
-     * 카테고리 선정
+     * initilization of category
      */
     private Category setCategory(String categoryStr) {
         return Category.valueOf(categoryStr.trim());
@@ -44,6 +44,9 @@ public class Record {
         return String.format("%s,%s,%d,%s,%s\n",this.useDate, this.detail, this.money, this.category, this.payType);
     }
 
+    /*
+     * return stringArray for mainview
+     */
     String[] getStringArrayForm() {
         return new String[] {useDate.toString(),
                 detail,

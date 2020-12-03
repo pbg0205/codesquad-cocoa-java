@@ -7,6 +7,7 @@ import java.io.*;
 
 public class MemberDao {
     private static final String MEMBER_LIST_PATH = ".\\AccountBook\\src\\repository\\MemberDB.csv";
+
     private BufferedReader bufferedReader;
     private FileReader fileReader;
 
@@ -29,7 +30,6 @@ public class MemberDao {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -141,7 +141,6 @@ public class MemberDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

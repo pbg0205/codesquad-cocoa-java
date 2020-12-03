@@ -36,9 +36,11 @@ public class Member {
         return balance;
     }
 
-    public void loadRecordList(RecordList recordList){
-        this.recordList = recordList;
-        this.balance = this.recordList.calculateBalance(this.balance);
+    /*
+     * about validation
+     */
+    public boolean isPasswordType() {
+        return REGULAR_EXPRESSION_OF_PASSWORD.matcher(this.password).find();
     }
 
     public boolean sameWith(Member member) {
@@ -49,10 +51,9 @@ public class Member {
         return this.getId().equals(id);
     }
 
-    public boolean isPasswordType() {
-        return REGULAR_EXPRESSION_OF_PASSWORD.matcher(this.password).find();
-    }
-
+    /*
+     * about access dao
+     */
     public StringBuilder getCsvRecords() {
         return this.recordList.getCsvRecords();
     }
@@ -61,6 +62,14 @@ public class Member {
         return this.recordList.makeRecordsAsArrayForm();
     }
 
+    public void loadRecordList(RecordList recordList){
+        this.recordList = recordList;
+        this.balance = this.recordList.calculateBalance(this.balance);
+    }
+
+    /*
+     * calculate balance
+     */
     public int calculateBalance(){
         return recordList.calculateBalance(this.balance);
     }
@@ -83,6 +92,9 @@ public class Member {
         this.balance = calculateBalance();
     }
 
+    /*
+     * equals and hashcode overriding
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {

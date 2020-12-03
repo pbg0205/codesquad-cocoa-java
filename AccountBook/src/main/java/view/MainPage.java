@@ -14,10 +14,8 @@ public class MainPage {
     private String title;
 
     private JFrame mainFrame;
-
     private MainPanel mainPanel;
     private AssetPanel assetPanel;
-    private GraphPanel graphPanel;
 
     public MainPage(Member loginedMember) {
         initLoginMember(loginedMember);
@@ -56,9 +54,6 @@ public class MainPage {
         private JButton assetButton;
         private ImageIcon assetIcon;
 
-        private JButton graphButton;
-        private ImageIcon graphIcon;
-
         private JButton logoutButton;
         private ImageIcon logoutIcon;
 
@@ -76,13 +71,12 @@ public class MainPage {
         private void initButtons() {
             int initX = 0;
             int initY = 520;
-            int buttonRowSize = 160;
+            int buttonRowSize = 240;
             int buttonColSize = 50;
-            int gap = 160;
+            int gap = 240;
 
             addAssetButton(initX, initY, buttonRowSize, buttonColSize);
-            addGraphButton(initX + gap, initY, buttonRowSize, buttonColSize);
-            addLogOutButton(initX + gap * 2, initY, buttonRowSize, buttonColSize);
+            addLogOutButton(initX + gap, initY, buttonRowSize, buttonColSize);
         }
 
         private void addAssetButton(int x, int y, int rowSize, int colSize) {
@@ -93,28 +87,7 @@ public class MainPage {
             assetButton.setBorderPainted(false);
             assetButton.setBackground(Color.white);
             assetButton.setBounds(x, y, rowSize, colSize);
-            assetButton.addActionListener(e -> {
-                System.out.println("작동 확인");
-
-//                assetPanel.setVisible(true);
-//                graphPanel.setVisible(false);
-            });
             add(assetButton);
-        }
-
-        private void addGraphButton(int x, int y, int rowSize, int colSize) {
-            graphButton = new JButton();
-            graphIcon = new ImageIcon(".\\AccountBook\\src\\main\\resources\\graphIcon.png");
-            graphIcon = changeSize(graphIcon);
-            graphButton.setIcon(graphIcon);
-            graphButton.setBorderPainted(false);
-            graphButton.setBackground(Color.white);
-            graphButton.addActionListener(e -> {
-//                assetPanel.setVisible(false);
-//                graphPanel.setVisible(true);
-            });
-            graphButton.setBounds(x, y, rowSize, colSize);
-            add(graphButton);
         }
 
         private void addLogOutButton(int x, int y, int rowSize, int colSize) {
@@ -292,7 +265,7 @@ public class MainPage {
         private String title = "추가";
 
         private JFrame insertFrame;
-        private InsertPanel insertPanel;
+        private InsertPage.insertPanel insertPanel;
 
         public InsertPage() {
             initComponent();
@@ -301,7 +274,7 @@ public class MainPage {
 
         private void initComponent() {
             insertFrame = new JFrame();
-            insertPanel = new InsertPage.InsertPanel();
+            insertPanel = new insertPanel();
         }
 
         private void setupFrame() {
@@ -314,7 +287,7 @@ public class MainPage {
             insertFrame.setVisible(true);
         }
 
-        class InsertPanel extends JPanel {
+        class insertPanel extends JPanel {
 
             private JLabel dateLabel;
             private JLabel detailLabel;
@@ -333,7 +306,7 @@ public class MainPage {
 
             private Font font;
 
-            InsertPanel() {
+            insertPanel() {
                 setupInsertPanel();
                 addComponents();
                 setupFont();
@@ -439,7 +412,7 @@ public class MainPage {
             }
 
             private void addCategoryComboBox(int x, int y, int width, int height) {
-                String[] categories = {"TRANSFORTATION", "FOOD", "CURTURE", "HEALTH", "BEAUTY", "ETC"};
+                String[] categories = {"TRANSFORTATION", "FOOD", "CULTURE", "HEALTH", "BEAUTY", "ETC"};
                 categoryComboBox = new JComboBox<>(categories);
                 categoryComboBox.setBounds(x, y, width, height);
                 categoryComboBox.setFont(font);
@@ -479,7 +452,6 @@ public class MainPage {
                         System.out.println(loginedMember.getCsvRecords());
                         insertFrame.setVisible(false);
                         insertFrame = null;
-                        assetPanel.repaint();
                     }
 
                     private Record getRecordFromTextField() {
@@ -499,8 +471,8 @@ public class MainPage {
                 cancelButton = new JButton(name);
                 cancelButton.setBounds(x, y, width, height);
                 cancelButton.addActionListener(e -> {
-                    insertFrame.setVisible(false);
-                    insertFrame = null;
+                    mainFrame.removeAll();
+                    mainFrame.repaint();
                 });
                 add(cancelButton);
             }
@@ -676,7 +648,7 @@ public class MainPage {
             }
 
             private void addCategoryComboBox(int x, int y, int width, int height) {
-                String[] categories = {"TRANSFORTATION", "FOOD", "CURTURE", "HEALTH", "BEAUTY", "ETC"};
+                String[] categories = {"TRANSFORTATION", "FOOD", "CULTURE", "HEALTH", "BEAUTY", "ETC"};
                 categoryComboBox = new JComboBox<>(categories);
                 categoryComboBox.setBounds(x, y, width, height);
                 categoryComboBox.setFont(font);
@@ -825,7 +797,6 @@ public class MainPage {
                 int width = 120;
                 int height = 25;
 
-
                 addIdIndexField(initX, initY, width, height);
             }
 
@@ -880,9 +851,5 @@ public class MainPage {
                 add(cancelButton);
             }
         }
-    }
-
-    private class GraphPanel extends JPanel {
-
     }
 }
