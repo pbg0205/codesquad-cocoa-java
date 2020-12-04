@@ -11,91 +11,30 @@ public class RecordDao {
     private final String memberRecordsPath;
     private final String csv = ".csv";
 
-    private BufferedReader bufferedReader;
-    private FileReader fileReader;
-
     private File file;
-
-    private FileWriter fileWriter;
-    private BufferedWriter bufferedWriter;
 
     public RecordDao(String memberId) {
         this.memberRecordsPath = RECORDS_DIRECTORY_PATH + memberId + this.csv;
     }
 
-    /*
-     * Reader Connection
-     */
-    private void connectReaderFromCsv() {
-        initFileReader();
-        initBufferedReader();
-    }
-
-    private void initFileReader() {
-        try {
-            this.fileReader = new FileReader(memberRecordsPath);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initBufferedReader() {
-        this.bufferedReader = new BufferedReader(fileReader);
-    }
 
     public RecordList loadRecords() {
         RecordList recordList = new RecordList();
         Record record;
         String line;
 
-        connectReaderFromCsv();
-
-        while ((line = readLine()) != null) {
-            record = parseMemberRecord(line);
-            recordList.insertRecord(record);
+        try (FileReader fileReader = new FileReader(memberRecordsPath);
+             BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            while ((line = bufferedReader.readLine()) != null) {
+                record = parseMemberRecord(line);
+                recordList.insertRecord(record);
+            }
+        } catch (FileNotFoundException fe) {
+            fe.printStackTrace();
+        } catch (IOException ie) {
+            ie.printStackTrace();
         }
-
-        closeReaders();
         return recordList;
-    }
-
-    private String readLine() {
-        try {
-            return this.bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
-    private void closeReaders() {
-        try {
-            fileReader.close();
-            bufferedReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /*
-     * Writer Connection
-     */
-    private void connectWriterFromCsv() {
-        initFileWriter();
-        initBufferedWriter();
-    }
-
-    private void initFileWriter() {
-        try {
-            this.fileWriter = new FileWriter(memberRecordsPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void initBufferedWriter() {
-        this.bufferedWriter = new BufferedWriter(fileWriter);
     }
 
     /*
@@ -111,15 +50,12 @@ public class RecordDao {
         }
     }
 
-    public void saveRecords(Member member){
-        StringBuilder stringBuilder;
+    public void saveRecords(Member member) {
+        StringBuilder stringBuilder = member.getCsvRecords();
 
-        connectWriterFromCsv();
-        stringBuilder = member.getCsvRecords();
-
-        try {
-            this.bufferedWriter.write(String.valueOf(stringBuilder));
-            bufferedWriter.close();
+        try(FileWriter fileWriter = new FileWriter(memberRecordsPath);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)){
+            bufferedWriter.write(String.valueOf(stringBuilder));
         } catch (IOException e) {
             e.printStackTrace();
         }
