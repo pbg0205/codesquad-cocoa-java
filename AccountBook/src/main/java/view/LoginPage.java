@@ -118,7 +118,7 @@ public class LoginPage {
             public void actionPerformed(ActionEvent e) {
                 String id = idTextField.getText();
                 String password = String.valueOf(passwordField.getPassword());
-                Member member = new Member(id, password);
+                Member member = new Member.Builder(id, password).build();
 
                 if(memberDao.hasMember(member)) {
                     JOptionPane.showMessageDialog(loginFrame, "로그인에 성공하였습니다.");

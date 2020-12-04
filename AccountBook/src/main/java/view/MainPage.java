@@ -471,8 +471,7 @@ public class MainPage {
                 cancelButton = new JButton(name);
                 cancelButton.setBounds(x, y, width, height);
                 cancelButton.addActionListener(e -> {
-                    mainFrame.removeAll();
-                    mainFrame.repaint();
+                    insertFrame.setVisible(false);
                 });
                 add(cancelButton);
             }
@@ -686,6 +685,7 @@ public class MainPage {
                         Record record = getRecord();
                         int index = getIndex();
                         loginedMember.modifyRecord(index, record);
+                        System.out.println(loginedMember.getCsvRecords());
                         modifyFrame.setVisible(false);
                         modifyFrame = null;
                     }
@@ -829,7 +829,7 @@ public class MainPage {
                     public void actionPerformed(ActionEvent e) {
                         int index = getIndex();
                         loginedMember.deleteRecord(index);
-
+                        System.out.println(loginedMember.getCsvRecords());
                         deleteFrame.setVisible(false);
                         deleteFrame = null;
                     }

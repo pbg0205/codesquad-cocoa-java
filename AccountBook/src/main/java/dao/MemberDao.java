@@ -178,9 +178,11 @@ public class MemberDao {
         String pw = data[1].trim();
 
         if (data.length >= 3) {
-            int balance = Integer.parseInt(data[2].trim());
-            return new Member(id, pw, balance);
+            return new Member.Builder(id, pw)
+                    .balance(Integer.parseInt(data[2].trim()))
+                    .build();
         }
-        return new Member(id, pw);
+        return new Member.Builder(id, pw)
+                .build();
     }
 }

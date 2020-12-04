@@ -7,21 +7,41 @@ public class Member {
     private static final Pattern REGULAR_EXPRESSION_OF_PASSWORD
             = Pattern.compile("[ !@#$%^&*(),.?\":{}|<>]");
 
-    private String id;
-    private String password;
+    private final String id;
+    private final String password;
+
     private int balance;
     private RecordList recordList;
 
-    public Member(String id, String password) {
-        this.id = id;
-        this.password = password;
+    public static class Builder {
+        //Essential parameter
+        private final String id;
+        private final String password;
+
+        //Selective parameter
+        private int balance = 0;
+        private RecordList recordList = new RecordList();
+
+        public Builder(String id, String password) {
+            this.id = id;
+            this.password = password;
+        }
+
+        public Builder balance(int value) {
+            this.balance = value;
+            return this;
+        }
+
+        public Member build() {
+            return new Member(this);
+        }
     }
 
-    public Member(String id, String password, int balance) {
-        this.id = id;
-        this.password = password;
-        this.balance = balance;
-        this.recordList = new RecordList();
+    private Member(Builder builder) {
+        this.id = builder.id;
+        this.password = builder.password;
+        this.balance = builder.balance;
+        this.recordList = builder.recordList;
     }
 
     public String getId() {
@@ -62,7 +82,7 @@ public class Member {
         return this.recordList.makeRecordsAsArrayForm();
     }
 
-    public void loadRecordList(RecordList recordList){
+    public void loadRecordList(RecordList recordList) {
         this.recordList = recordList;
         this.balance = this.recordList.calculateBalance(this.balance);
     }
@@ -70,7 +90,7 @@ public class Member {
     /*
      * calculate balance
      */
-    public int calculateBalance(){
+    public int calculateBalance() {
         return recordList.calculateBalance(this.balance);
     }
 

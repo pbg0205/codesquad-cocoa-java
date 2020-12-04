@@ -209,9 +209,10 @@ public class SignUpPage {
             private Member makeDto() {
                 String id = String.valueOf(idTextField.getText());
                 String pw = String.valueOf(passwordField.getPassword());
-                int balance = Integer.parseInt(balanceField.getText());
 
-                return new Member(id, pw, balance);
+                return new Member.Builder(id, pw)
+                        .balance(Integer.parseInt(balanceField.getText()))
+                        .build();
             }
 
             private void addMemberInMemberDao(Member member) {
