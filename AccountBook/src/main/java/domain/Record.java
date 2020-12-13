@@ -1,11 +1,11 @@
 package domain;
 
-public class Record {
-    private UseDate useDate;
-    private String detail;
-    private int money;
-    private Category category;
-    private PayType payType;
+public final class Record {
+    private final UseDate useDate;
+    private final String detail;
+    private final int money;
+    private final Category category;
+    private final PayType payType;
 
     public Record(String useDateStr, String detail, int money, String category, String payType) {
         this.useDate = new UseDate(useDateStr);
